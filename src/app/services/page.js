@@ -67,15 +67,18 @@ export default function Services() {
       <Header />
 
       {/* Hero */}
-      <div className="relative bg-slate-800 py-20">
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center text-white">
-          <h1 className="text-5xl font-bold mb-4">Services</h1>
-          <p className="text-xl max-w-3xl mx-auto px-4">
-            At Migrantifly, we offer a complete range of migration services to help you realize your dream of living, studying, or working abroad.
-          </p>
-        </div>
-      </div>
+            <div
+              className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[45vh]"
+              style={{ backgroundImage: "url('/your-image-path.jpg')" }} // Replace with your image path
+            >
+              <div className="absolute inset-0 bg-black/50"></div>
+              <div className="relative z-10 text-center text-white items-center pt-24">
+                <h1 className="text-5xl font-bold mb-4">Services</h1>
+                <p className="text-xl max-w-2xl mx-auto px-4">
+                  At Migrantifly, we offer a complete range of migration services to help you realize your dream of living, studying, or working abroad.
+                </p>
+              </div>
+            </div>
 
       {/* Services */}
       <div className="py-20">
@@ -204,10 +207,10 @@ export default function Services() {
 
                   {/* Circular Image */}
                   <div className="col-span-1 relative h-[500px] flex items-center justify-center">
-                    <div className="absolute w-[424px] h-[424px] bg-[#D9D9D9] rounded-full left-0 top-0 z-0">
-                      <img src="" alt="" className="w-full h-full object-contain rounded-full" />
+                    <div className="absolute w-[320px] h-[320px] bg-[#D9D9D9] rounded-full left-10 top-32 z-0">
+                      <img src="/images/about.png" alt="" className="w-full h-full object-contain rounded-full items-center justify-center" />
                     </div>
-                    <div className="absolute w-[224px] h-[224px] bg-[#B3B3B3] rounded-full left-0 top-64 z-10">
+                    <div className="absolute w-[200px] h-[200px] bg-[#B3B3B3] rounded-full left-0 top-80">
                       <img src="" alt="" className="w-full h-full object-contain rounded-full" />
                     </div>
                   </div>

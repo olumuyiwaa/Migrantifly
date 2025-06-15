@@ -29,7 +29,7 @@ export default function MigrationProcess() {
           {/* Left Circles */}
           <div className="relative w-full h-[500px]">
             {/* Big circle */}
-            <div className="absolute w-[424px] h-[424px] bg-[#D9D9D9] rounded-full left-0 top-0 z-0">
+            <div className="absolute w-[400px] h-[400px] bg-[#D9D9D9] rounded-full left-0 top-0 z-0">
               <img
                 src=""
                 alt=""
@@ -38,7 +38,7 @@ export default function MigrationProcess() {
             </div>
 
             {/* Small circle */}
-            <div className="absolute w-[224px] h-[224px] bg-[#B3B3B3] rounded-full left-64 top-64 z-10">
+            <div className="absolute w-[224px] h-[224px] bg-[#B3B3B3] rounded-full left-40 top-64">
               <img
                 src=""
                 alt=""
@@ -49,18 +49,31 @@ export default function MigrationProcess() {
 
 
           {/* Vertical Stepper */}
-          <div className="flex flex-col items-center relative">
+          <div className="flex flex-row md:flex-col items-center justify-center gap-4 md:gap-0">
             {steps.map((_, index) => (
-              <div key={index} className="flex flex-col items-center">
+              <div
+                key={index}
+                className="flex flex-col items-center md:flex-col"
+              >
+                {/* Step Circle */}
                 <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg border-4 border-white shadow-lg z-10">
                   {`0${index + 1}`}
                 </div>
+
+                {/* Connector */}
                 {index < steps.length - 1 && (
-                  <div className="h-16 border-l-2 border-dashed border-blue-600"></div>
+                  <div
+                    className="
+                      w-16 h-0 border-t-2 border-dashed border-blue-600
+                      md:w-0 md:h-16 md:border-t-0 md:border-l-2"
+                  ></div>
                 )}
               </div>
             ))}
           </div>
+
+
+
 
           {/* Text Descriptions */}
           <div className="space-y-12">

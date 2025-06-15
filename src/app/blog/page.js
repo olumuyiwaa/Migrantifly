@@ -9,9 +9,12 @@ export default function Blog() {
   return (
     <main>
       <Header />
-      <div className="relative bg-slate-800 py-20">
+      <div
+        className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[35vh]"
+        style={{ backgroundImage: "url('/your-image-path.jpg')" }} // Replace with your image path
+      >
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center text-white">
+        <div className="relative z-10 text-center text-white items-center pt-24">
           <h1 className="text-5xl font-bold mb-4">Blog and News</h1>
         </div>
       </div>
@@ -103,7 +106,7 @@ export default function Blog() {
                       </span>
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-xs font-medium text-gray-900">
                         {post.author || 'Immigration Expert'}
                       </div>
                       <div className="text-xs text-gray-500">

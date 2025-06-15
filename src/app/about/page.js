@@ -9,9 +9,12 @@ export default function About() {
   return (
     <main>
       <Header />
-      <div className="relative bg-slate-800 py-20">
+      <div
+        className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[45vh]"
+        style={{ backgroundImage: "url('/your-image-path.jpg')" }} // Replace with your image path
+      >
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center text-white">
+        <div className="relative z-10 text-center text-white items-center pt-24">
           <h1 className="text-5xl font-bold mb-4">About Us</h1>
           <p className="text-xl max-w-2xl mx-auto px-4">
             From dreaming to thriving — we guide you through every step of your migration journey

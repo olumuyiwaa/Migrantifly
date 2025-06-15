@@ -1,4 +1,3 @@
-// src/app/blog/[slug]/page.js - Fixed version with all imports removed
 import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import Link from 'next/link'
@@ -40,11 +39,11 @@ export default function BlogPost({ params }) {
   return (
     <main>
       <Header />
-      
+
       {/* Hero Section */}
       <div className="relative bg-slate-800 py-20">
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pt-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {currentPost.title}
           </h1>
@@ -54,41 +53,45 @@ export default function BlogPost({ params }) {
         </div>
       </div>
 
-      {/* Main Content */}
-      <article className="py-12 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Featured Image */}
-          <div className="mb-8">
-            <div className="h-64 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center">
-              <span className="text-blue-600 text-lg">Featured Image</span>
+      {/* Main Content with Sidebar */}
+      <div className="bg-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
+          {/* Main Article */}
+          <article className="lg:col-span-2">
+            {/* Introduction */}
+            <div className="prose prose-lg max-w-none mb-8">
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                {currentPost.content.introduction}
+              </p>
             </div>
-          </div>
 
-          {/* Introduction */}
-          <div className="prose prose-lg max-w-none mb-8">
-            <p className="text-xl text-gray-700 leading-relaxed mb-6">
-              {currentPost.content.introduction}
-            </p>
-          </div>
+            {/* Dynamic Content Sections */}
+            {currentPost.content.sections.map((section, index) => (
+              <section key={index} className="mb-6">
+                <h4 className="text-3xl font-medium text-gray-900 mb-2">{section.title}</h4>
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    {section.content}
+                  </p>
+              </section>
+            ))}
+          </article>
 
-          {/* Dynamic Content Sections */}
-          {currentPost.content.sections.map((section, index) => (
-            <section key={index} className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">{section.title}</h2>
-              <div className={`p-6 rounded-lg ${
-                index % 3 === 0 ? 'bg-blue-50' : 
-                index % 3 === 1 ? 'bg-gray-50' : 
-                'bg-green-50'
-              }`}>
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                  {section.content}
-                </p>
-              </div>
-            </section>
-          ))}
+          {/* Sidebar */}
+          <aside className="space-y-8">
+            {/* Search Box */}
+            <div className="bg-gray-100 rounded-lg p-4">
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full px-4 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            {/* Example Sidebar Widget */}
+            <div className="bg-blue-100 rounded-lg h-64"></div>
+            <div className="bg-blue-200 rounded-lg h-64"></div>
+          </aside>
         </div>
-      </article>
+      </div>
 
       <Footer />
     </main>
