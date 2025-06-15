@@ -57,12 +57,13 @@ export default function Header() {
                 </div>
               )}
             </div> */}
-            <Link
+            {/* <Link
               href="/signup"
               className="text-primary-600 hover:text-primary-700 font-medium"
             >
               Sign Up
-            </Link>
+            </Link> */}
+            
           </div>
 
           <div className="md:hidden">

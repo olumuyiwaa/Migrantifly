@@ -208,7 +208,7 @@ export default function Services() {
                   {/* Circular Image */}
                   <div className="col-span-1 relative h-[500px] flex items-center justify-center">
                     <div className="absolute w-[320px] h-[320px] bg-[#D9D9D9] rounded-full left-10 top-32 z-0">
-                      <img src="/images/about.png" alt="" className="w-full h-full object-contain rounded-full items-center justify-center" />
+                      <img src="/images/about2.png" alt="" className="w-full h-full object-contain rounded-full items-center justify-center" />
                     </div>
                     <div className="absolute w-[200px] h-[200px] bg-[#B3B3B3] rounded-full left-0 top-80">
                       <img src="" alt="" className="w-full h-full object-contain rounded-full" />

@@ -3,6 +3,7 @@ import Footer from '../../../components/Footer'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import posts from '../../../data/posts';
+// import SearchSidebar from '../../../data/SearchSidebar';
 
 
 // Generate static paths for all blog posts
@@ -86,9 +87,24 @@ export default function BlogPost({ params }) {
                 className="w-full px-4 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-400"
               />
             </div>
-            {/* Example Sidebar Widget */}
-            <div className="bg-blue-100 rounded-lg h-64"></div>
-            <div className="bg-blue-200 rounded-lg h-64"></div>
+
+            {/* Recent Post Widget */}
+            <div className="rounded-lg overflow-hidden">
+              <div className="bg-blue-600 px-6 py-4">
+                <h3 className="text-white text-l font-bold">Recent Post</h3>
+              </div>
+              <div className="bg-gray-700 px-6 py-6 space-y-6">
+                {posts.slice(0, 5).map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="block text-gray-100 text-lg leading-snug hover:underline"
+                  >
+                    {post.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </aside>
         </div>
       </div>
