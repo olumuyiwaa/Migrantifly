@@ -68,10 +68,10 @@ export default function Services() {
 
       {/* Hero */}
             <div
-              className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[45vh]"
-              style={{ backgroundImage: "url('/your-image-path.jpg')" }} // Replace with your image path
+              className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[55vh]"
+                style={{ backgroundImage: 'url("/images/bg.png")' }}
             >
-              <div className="absolute inset-0 bg-black/50"></div>
+              {/* <div className="absolute inset-0 bg-black/50"></div> */}
               <div className="relative z-10 text-center text-white items-center pt-24">
                 <h1 className="text-5xl font-bold mb-4">Services</h1>
                 <p className="text-xl max-w-2xl mx-auto px-4">
@@ -138,7 +138,7 @@ export default function Services() {
               </div>
 
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-3 gap-16 items-center">
+                <div className="grid lg:grid-cols-3 gap-8 items-center">
                   {/* Form */}
                   <div className="col-span-2 w-full">
                     <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -175,8 +175,8 @@ export default function Services() {
                         className="w-full px-4 py-3 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
                       ></textarea>
 
-                      <div className="text-center">
-                        <p className="text-white font-medium mb-4">CV/Resume Upload</p>
+                      <div className="">
+                        <p className="text-white font-medium mb-4">CV / Resume Upload</p>
                         <input
                           type="file"
                           multiple
@@ -206,7 +206,7 @@ export default function Services() {
                   </div>
 
                   {/* Circular Image */}
-                  <div className="col-span-1 relative h-[500px] flex items-center justify-center">
+                  <div className="col-span-1 relative h-[500px] flex items-center justify-center mx-8">
                     <div className="absolute w-[320px] h-[320px] bg-[#D9D9D9] rounded-full left-10 top-32 z-0">
                       <img src="/images/about2.png" alt="" className="w-full h-full object-contain rounded-full items-center justify-center" />
                     </div>

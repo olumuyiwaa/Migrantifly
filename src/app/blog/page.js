@@ -10,11 +10,11 @@ export default function Blog() {
     <main>
       <Header />
       <div
-        className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[35vh]"
-        style={{ backgroundImage: "url('/your-image-path.jpg')" }} // Replace with your image path
+        className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[55vh]"
+        style={{ backgroundImage: 'url("/images/bg.png")' }}
       >
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center text-white items-center pt-24">
+        {/* <div className="absolute inset-0 bg-black/50"></div> */}
+        <div className="relative z-10 text-center text-white items-center pt-32">
           <h1 className="text-5xl font-bold mb-4">Blog and News</h1>
         </div>
       </div>

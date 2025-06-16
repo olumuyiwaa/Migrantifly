@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 pt-16">
       <div className="absolute inset-0 bg-black/50"></div>
-<div className="relative min-h-[65vh] overflow-hidden">
+<div className="relative min-h-[75vh] overflow-hidden">
   {/* Video Background */}
   <video
     autoPlay
@@ -22,7 +22,7 @@ export default function Hero() {
   <div className="absolute inset-0 bg-black bg-opacity-50 z-5"></div>
   
   {/* Your existing content with updated z-index */}
-  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-48">
     <div className="grid lg:grid-cols-2 gap-12 items-center">
       <div className="text-white">
         <h1 className="text-5xl lg:text-6xl font-bold mb-6">

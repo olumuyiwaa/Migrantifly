@@ -46,7 +46,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden">
+    <section className="py-20 bg-gray-50">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-4xl font-bold mb-4">What Our Clients Are Saying</h2>
@@ -54,7 +54,7 @@ export default function Testimonials() {
 
         <div className="relative">
           {/* Slide Wrapper */}
-          <div className="overflow-hidden">
+          <div className="">
             <div
               ref={sliderRef}
               className="flex transition-transform duration-700 ease-in-out"
@@ -87,7 +87,7 @@ export default function Testimonials() {
           </div>
 
           {/* Navigation */}
-          <div className="flex justify-between items-center mt-6">
+          {/* <div className="flex justify-between items-center mt-6">
             <button onClick={prev} className="px-4 py-2 bg-yellow-500 rounded-full text-white hover:bg-yellow-600">
               ‹
             </button>
@@ -103,7 +103,7 @@ export default function Testimonials() {
             <button onClick={next} className="px-4 py-2 bg-yellow-500 rounded-full text-white hover:bg-yellow-600">
               ›
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

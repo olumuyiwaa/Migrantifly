@@ -80,13 +80,13 @@ export default function BlogPost({ params }) {
           {/* Sidebar */}
           <aside className="space-y-8">
             {/* Search Box */}
-            <div className="bg-gray-100 rounded-lg p-4">
+            {/* <div className="bg-gray-100 rounded-lg p-4">
               <input
                 type="text"
                 placeholder="Search"
                 className="w-full px-4 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-400"
               />
-            </div>
+            </div> */}
 
             {/* Recent Post Widget */}
             <div className="rounded-lg overflow-hidden">
@@ -94,7 +94,7 @@ export default function BlogPost({ params }) {
                 <h3 className="text-white text-l font-bold">Recent Post</h3>
               </div>
               <div className="bg-gray-700 px-6 py-6 space-y-6">
-                {posts.slice(0, 5).map((post) => (
+                {posts.slice(0, 10).map((post) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
