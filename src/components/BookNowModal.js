@@ -20,14 +20,14 @@ export default function BookNowModal({
           &times;
         </button>
 
-        <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+        <h2 className="text-4xl lg:text-4xl font-bold mb-6">
           Let's Build Your Future Together
         </h2>
         <p className="text-blue-100 text-lg mb-8">
           Start with a free assessment or talk to one of our migration specialists today.
         </p>
 
-        <form onSubmit={onSubmit} className="space-y-6">
+        <form onSubmit={onSubmit} className="space-y-4">
           <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
             {["name", "phone", "email"].map((field) => (
               <input
@@ -64,7 +64,7 @@ export default function BookNowModal({
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-8 justify-center pt-4">
+          <div className="flex flex-col sm:flex-row gap-8 justify-center">
             <button
               type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors"
