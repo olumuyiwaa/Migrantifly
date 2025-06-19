@@ -203,7 +203,7 @@ export default function Testimonials() {
               className={`flex ${isDragging ? '' : 'transition-transform duration-700 ease-in-out'} cursor-grab active:cursor-grabbing`}
               style={{
                 transform: `translateX(${getTransform()}%)`,
-                width: `${testimonials.length * (100 / cardsToShow)}%`,
+                width: `${(testimonials.length / cardsToShow) * 100}%`,
               }}
               onMouseDown={handleDragStart}
               onTouchStart={handleDragStart}
@@ -213,8 +213,8 @@ export default function Testimonials() {
               {testimonials.map((testimonial, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 px-2 sm:px-3 lg:px-4"
-                  style={{ width: `${100 /cardsToShow}%` }}
+                                    className="w-[124px] px-4 md:w-1/3 flex-shrink-0"
+
                 >
                   <div className="bg-yellow-300 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col min-h-[280px] sm:min-h-[320px] select-none">
                     {/* Quote Icon and Divider */}
