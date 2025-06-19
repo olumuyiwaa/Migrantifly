@@ -42,17 +42,28 @@ export default function BlogPost({ params }) {
       <Header />
 
       {/* Hero Section */}
-      <div className="relative bg-slate-800 py-20">
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pt-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {currentPost.title}
-          </h1>
-          <p className="text-xl text-gray-200 mb-6">
-            Published on {currentPost.date} by Migration Visa
-          </p>
-        </div>
-      </div>
+      <div className="py-20">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                  <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pt-12">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                      {currentPost.title}
+                    </h1>
+                    <p className="text-xl text-gray-200 mb-6">
+                      Published on {currentPost.date} by Migration Visa
+                    </p>
+                  </div>
+                  <Image
+                    src={post.image}
+                    alt={post.imageAlt || post.title}
+                    width={600}
+                    height={384}
+                    className="relative h-96 rounded-lg overflow-hidden w-full h-full flex items-center justify-center"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
 
       {/* Main Content with Sidebar */}
       <div className="bg-white py-12">
