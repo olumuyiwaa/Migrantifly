@@ -1,78 +1,9 @@
-// // src/data/posts.js
-
-// const posts = [
-//   {
-//     slug: "essential-documents-migration-application",
-//     date: "Apr 26, 2025",
-//     title: "Essential Documents for Your Migration Application",
-//     excerpt: "Learn about the key documents you'll need to prepare for a successful visa application process.",
-//     image: "/blog1.jpg",
-//     content: {
-//       introduction: "When applying for a migration visa...",
-//       sections: [
-//         { title: "Personal Identity Documents", content: "Your passport..." },
-//         { title: "Educational Qualifications", content: "Academic transcripts..." },
-//         { title: "Work Experience Documentation", content: "Employment letters..." }
-//       ]
-//     }
-//   },
-//   {
-//     slug: "top-5-countries-skilled-migration-2025",
-//     date: "Apr 25, 2025",
-//     title: "Top 5 Countries for Skilled Migration in 2025",
-//     excerpt: "Discover the best destinations...",
-//     image: "/blog2.jpg",
-//     content: {
-//       introduction: "As global mobility increases...",
-//       sections: [
-//         { title: "Australia", content: "Australia continues to lead..." },
-//         { title: "Canada", content: "Canada's Express Entry system..." },
-//         { title: "New Zealand", content: "New Zealand offers a high quality..." }
-//       ]
-//     }
-//   },
-//   {
-//     slug: "visa-interview-preparation-guide",
-//     date: "Apr 24, 2025",
-//     title: "How to Prepare for Your Visa Interview",
-//     excerpt: "Expert tips and strategies...",
-//     image: "/blog3.jpg",
-//     content: {
-//       introduction: "The visa interview is a critical step...",
-//       sections: [
-//         { title: "Research Common Questions", content: "Familiarize yourself..." },
-//         { title: "Organize Your Documents", content: "Have all required documents..." },
-//         { title: "Practice Your Interview Skills", content: "Conduct mock interviews..." }
-//       ]
-//     }
-//   },
-//   {
-//     slug: "subclass-491-visa-regional-australia",
-//     date: "Feb 15, 2025",
-//     title: "Subclass 491 Visa: Your Pathway to Living & Working in Regional Australia",
-//     excerpt: "Everything you need to know...",
-//     image: "/blog4.jpg",
-//     content: {
-//       introduction: "The Subclass 491 visa, officially known as...",
-//       sections: [
-//         { title: "Benefits of the Subclass 491 Visa", content: "Work and live in regional..." },
-//         { title: "Eligibility Criteria", content: "To apply for the Subclass 491..." },
-//         { title: "Application Process", content: "The application process involves..." },
-//         { title: "Regional Areas and Costs", content: "Australia defines regional areas..." }
-//       ]
-//     }
-//   }
-// ];
-
-// export default posts;
-// src/data/posts.js
-
 const posts = [
   {
     slug: "essential-documents-migration-application",
     date: "2025-04-26",
     publishDate: "Apr 26, 2025",
-    title: "Essential Documents for Your Migration Application: Complete Checklist 2025",
+    title: "Essential Documents for Your Migration Application: Complete Checklist",
     excerpt: "Master your visa application with our comprehensive guide to essential documents. Learn what papers you need, how to prepare them, and avoid common mistakes that delay applications.",
     metaDescription: "Complete guide to essential documents for migration applications. Includes checklist, preparation tips, and common mistakes to avoid for successful visa processing.",
     tags: ["visa documents", "migration checklist", "immigration paperwork", "visa application"],
@@ -175,7 +106,7 @@ const posts = [
     slug: "top-5-countries-skilled-migration-2025",
     date: "2025-04-25",
     publishDate: "Apr 25, 2025",
-    title: "Top 5 Countries for Skilled Migration in 2025: Compare Opportunities & Requirements",
+    title: "Top 5 Countries for Skilled Migration: Compare Opportunities & Requirements",
     excerpt: "Discover the best destinations for skilled workers in 2025. Compare immigration programs, job markets, living costs, and quality of life across leading migration countries.",
     metaDescription: "Compare top 5 countries for skilled migration in 2025. Detailed analysis of immigration programs, job opportunities, costs, and quality of life for skilled workers.",
     tags: ["skilled migration", "immigration destinations", "work visa", "global mobility"],
@@ -306,7 +237,7 @@ const posts = [
     slug: "visa-interview-preparation-guide",
     date: "2025-04-24",
     publishDate: "Apr 24, 2025",
-    title: "Master Your Visa Interview: Complete Preparation Guide for 2025",
+    title: "Master Your Visa Interview: Complete Preparation Guide",
     excerpt: "Ace your visa interview with expert strategies, common questions, and insider tips. Learn what officers look for and how to present your case confidently.",
     metaDescription: "Complete visa interview preparation guide with common questions, expert tips, and strategies to increase your success rate. Prepare confidently for your interview.",
     tags: ["visa interview", "interview preparation", "immigration interview", "visa tips"],
@@ -404,7 +335,7 @@ const posts = [
     slug: "subclass-491-visa-regional-australia",
     date: "2025-02-15",
     publishDate: "Feb 15, 2025",
-    title: "Subclass 491 Visa: Complete Guide to Regional Australia Migration in 2025",
+    title: "Subclass 491 Visa: Complete Guide to Regional Australia Migration",
     excerpt: "Comprehensive guide to Australia's Subclass 491 visa - your pathway to regional living and eventual permanent residency. Includes eligibility, application process, and regional opportunities.",
     metaDescription: "Complete Subclass 491 visa guide for 2025. Learn eligibility criteria, application process, regional areas, costs, and pathway to permanent residency in Australia.",
     tags: ["subclass 491", "regional australia", "australian visa", "skilled regional visa"],
