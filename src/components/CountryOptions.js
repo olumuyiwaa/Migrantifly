@@ -18,24 +18,24 @@ export default function CountryOptions() {
       description:
         "Learn about Brazil’s growing immigration programs, offering residency options for remote workers, entrepreneurs, and investors interested in experiencing life in South America’s largest economy.",
     },
-    {
-      name: "USA",
-      flag: "🇺🇸",
-      description:
-        "Access detailed insights into specialized U.S. immigration programs, including diversity visas, employment-based green cards, and business visas for innovators and investors.",
-    },
-    {
-      name: "UK",
-      flag: "🇬🇧",
-      description:
-        "Explore the expanding categories of UK visas, such as the Global Talent Visa, Start-up Visa, and Health & Care Worker Visa, designed to attract skilled individuals from around the world.",
-    },
-    {
-      name: "Brazil",
-      flag: "🇧🇷",
-      description:
-        "Discover Brazil’s extended residence and citizenship options, including pathways for digital nomads, retirees, and those with family or business ties to the country.",
-    },
+  {
+    name: "Canada",
+    flag: "🇨🇦",
+    description:
+      "Explore Canada’s inclusive immigration system, with options like Express Entry, Provincial Nominee Programs (PNPs), and pathways for students, skilled workers, and family sponsorships.",
+  },
+  {
+    name: "Australia",
+    flag: "🇦🇺",
+    description:
+      "Learn about Australia’s diverse immigration streams, including skilled migration, employer sponsorship, student visas, and permanent residency for those seeking a new life Down Under.",
+  },
+  {
+    name: "New Zealand",
+    flag: "🇳🇿",
+    description:
+      "Discover New Zealand’s welcoming immigration options for skilled professionals, students, and families—offering a balanced lifestyle, natural beauty, and long-term residency pathways.",
+  },
   ];
 
 
