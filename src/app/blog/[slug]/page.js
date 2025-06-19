@@ -54,8 +54,8 @@ export default function BlogPost({ params }) {
                     </p>
                   </div>
                   <Image
-                    src={post.image}
-                    alt={post.imageAlt || post.title}
+                    src={currentPost.image}
+                    alt={currentPost.imageAlt || currentPost.title}
                     width={600}
                     height={384}
                     className="relative h-96 rounded-lg overflow-hidden w-full h-full flex items-center justify-center"
