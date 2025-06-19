@@ -99,7 +99,7 @@ export default function BlogPost({ params }) {
                   <Link
                     key={p.slug}
                     href={`/blog/${p.slug}`}
-                    className="block text-blue-800 hover:underline"
+                    className="block text-white hover:underline"
                   >
                     {p.title}
                   </Link>
