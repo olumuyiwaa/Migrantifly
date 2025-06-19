@@ -37,8 +37,10 @@ export default function Testimonials() {
 
   const [cardsToShow, setCardsToShow] = useState(getCardsToShow);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = Math.ceil(testimonials.length / cardsToShow);
   const sliderRef = useRef(null);
+
+  // Calculate total slides based on current cardsToShow
+  const totalSlides = Math.max(1, testimonials.length - cardsToShow + 1);
 
   // Handle window resize
   useEffect(() => {
@@ -55,17 +57,25 @@ export default function Testimonials() {
   // Auto-slide functionality
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % totalSlides);
-    }, 7000);
+      setCurrentIndex((prev) => {
+        const nextIndex = prev + 1;
+        // If we've reached the end, go back to the beginning
+        if (nextIndex >= totalSlides) {
+          return 0;
+        }
+        return nextIndex;
+      });
+    }, 4000); // Reduced to 4 seconds for smoother experience
+
     return () => clearInterval(interval);
   }, [totalSlides]);
 
   const prev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
+    setCurrentIndex((prev) => prev === 0 ? totalSlides - 1 : prev - 1);
   };
 
   const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    setCurrentIndex((prev) => prev >= totalSlides - 1 ? 0 : prev + 1);
   };
 
   return (
@@ -106,7 +116,7 @@ export default function Testimonials() {
               className="flex transition-transform duration-700 ease-in-out"
               style={{
                 transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
-                width: `${(testimonials.length / cardsToShow) * 100}%`,
+                width: `${testimonials.length * (100 / cardsToShow)}%`,
               }}
             >
               {testimonials.map((testimonial, idx) => (
