@@ -20,10 +20,10 @@ export default function BookNowModal({
           &times;
         </button>
 
-        <h2 className="text-4xl lg:text-4xl font-bold mb-6">
+        <h2 className="text-4xl lg:text-4xl font-bold mb-2">
           Let's Build Your Future Together
         </h2>
-        <p className="text-blue-100 text-lg mb-8">
+        <p className="text-blue-100 text-lg mb-4">
           Start with a free assessment or talk to one of our migration specialists today.
         </p>
 
@@ -37,7 +37,7 @@ export default function BookNowModal({
                 placeholder={field[0].toUpperCase() + field.slice(1)}
                 value={formData[field]}
                 onChange={onInputChange}
-                className="px-4 py-3 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                className="px-3 py-2 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
               />
             ))}
           </div>
@@ -48,7 +48,7 @@ export default function BookNowModal({
             rows="4"
             value={formData.message}
             onChange={onInputChange}
-            className="w-full px-4 py-3 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
+            className="w-full px-3 py-2 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
           />
 
           <div>
@@ -59,7 +59,7 @@ export default function BookNowModal({
               accept=".txt,.doc,.docx,.pdf,.jpg,.png"
               className="text-sm text-blue-100 file:bg-blue-600 file:text-white file:px-4 file:py-2 file:rounded-xl file:cursor-pointer"
             />
-            <p className="text-xs text-blue-200 mt-2">
+            <p className="text-xs text-blue-200">
               Accepted file types: txt, doc, docx, pdf, jpg, png. Max file size: 32 MB. Max files: 5.
             </p>
           </div>
