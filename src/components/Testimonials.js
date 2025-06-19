@@ -226,16 +226,10 @@ export default function Testimonials() {
                     </div>
 
                     {/* Testimonial Text */}
-                    <p className="text-gray-900 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 text-center flex-grow">
-                      "{testimonial.text}"
-                    </p>
-
-                    {/* Author Info */}
+                    <p className="text-black text-lg mb-6">{t.text}</p>
                     <div className="flex items-center mt-auto">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-400 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
-                      <span className="font-bold text-gray-900 text-base sm:text-lg">
-                        {testimonial.author}
-                      </span>
+                      <div className="w-14 h-14 bg-gray-300 rounded-full mr-4"></div>
+                      <span className="font-bold text-black text-lg">{t.author}</span>
                     </div>
                   </div>
                 </div>
