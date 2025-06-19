@@ -94,7 +94,7 @@ export default function Testimonials() {
             {testimonials.map((t, idx) => (
               <div
                 key={idx}
-                className="w-full md:w-1/3 px-4 flex-shrink-0"
+className="w-[120px] md:w-1/3 px-4 flex-shrink-0"
               >
                 <div className="bg-yellow-300 rounded-[24px] p-8 shadow-lg h-full flex flex-col">
                   <div className="flex items-center mb-4">
