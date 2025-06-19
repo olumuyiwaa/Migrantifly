@@ -59,7 +59,7 @@ export default function BookNowModal({
               accept=".txt,.doc,.docx,.pdf,.jpg,.png"
               className="text-sm text-blue-100 file:bg-blue-600 file:text-white file:px-4 file:py-2 file:rounded-xl file:cursor-pointer"
             />
-            <p className="text-xs text-blue-200">
+            <p className="text-xs text-blue-200 mt-2">
               Accepted file types: txt, doc, docx, pdf, jpg, png. Max file size: 32 MB. Max files: 5.
             </p>
           </div>
