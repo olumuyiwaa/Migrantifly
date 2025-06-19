@@ -216,22 +216,27 @@ export default function Testimonials() {
                   className="flex-shrink-0 px-2 sm:px-3 lg:px-4"
                   style={{ width: `${100 /cardsToShow}%` }}
                 >
-                  <div className="bg-yellow-300 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col min-h-[280px] sm:min-h-[320px] select-none">
-                    {/* Quote Icon and Divider */}
-                    <div className="flex items-center mb-4 sm:mb-6">
-                      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-gray-700 mr-3 sm:mr-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
-                      </svg>
-                      <span className="flex-1 border-t border-gray-700 opacity-40"></span>
-                    </div>
+                  <div className="bg-yellow-300 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col min-h-[280px] sm:min-h-[320px]">
+                      {/* Quote Icon and Divider */}
+                      <div className="flex items-center mb-4 sm:mb-6">
+                        <svg className="w-6 h-6 sm:w-8 sm:h-8 text-gray-700 mr-3 sm:mr-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                        </svg>
+                        <span className="flex-1 border-t border-gray-700 opacity-40"></span>
+                      </div>
 
-                    {/* Testimonial Text */}
-                    <p className="text-black text-lg mb-6">{t.text}</p>
-                    <div className="flex items-center mt-auto">
-                      <div className="w-14 h-14 bg-gray-300 rounded-full mr-4"></div>
-                      <span className="font-bold text-black text-lg">{t.author}</span>
-                    </div>
-                  </div>
+                      {/* Testimonial Text */}
+                      <p className="text-gray-900 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 text-center flex-grow">
+                        "{testimonial.text}"
+                      </p>
+
+                      {/* Author Info */}
+                      <div className="flex items-center mt-auto">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-400 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                        <span className="font-bold text-gray-900 text-base sm:text-lg">
+                          {testimonial.author}
+                        </span>
+                      </div>
                 </div>
               ))}
             </div>
