@@ -29,22 +29,14 @@ export default function BlogPost({ params }) {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
+      <div className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[55vh]"
+          style={{ backgroundImage: `url(${post.image})` }}>
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="relative z-10 text-center text-white items-center pt-32">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
             <p className="text-lg text-gray-300">Published on {post.publishDate} by {post.author}</p>
           </div>
-          <Image
-            src={post.image}
-            alt={post.imageAlt || post.title}
-            width={600}
-            height={384}
-            className="rounded-xl object-cover w-full h-96"
-            priority
-          />
-        </div>
-      </section>
+      </div>
 
       {/* Content + Sidebar */}
       <section className="bg-white py-16">
