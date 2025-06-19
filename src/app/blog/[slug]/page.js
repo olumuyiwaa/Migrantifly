@@ -81,24 +81,34 @@ export default function BlogPost({ params }) {
           </article>
 
           {/* Sidebar */}
-          <aside className="space-y-8">
-            <div className="rounded-lg overflow-hidden">
-              <div className="bg-blue-600 px-6 py-4">
-                <h3 className="text-white text-lg font-bold">Recent Posts</h3>
+            <aside className="space-y-8">
+              {/* Search Box */}
+              {/* <div className="bg-gray-100 rounded-lg p-4">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-400"
+                />
+              </div> */}
+
+              {/* Recent Post Widget */}
+              <div className="rounded-lg overflow-hidden">
+                <div className="bg-blue-600 px-6 py-4">
+                  <h3 className="text-white text-l font-bold">Recent Post</h3>
+                </div>
+                <div className="bg-gray-700 px-6 py-6 space-y-6">
+                  {posts.slice(0, 10).map((post) => (
+                    <Link
+                      key={p.slug}
+                      href={`/blog/${p.slug}`}
+                      className="block text-gray-100 text-lg leading-snug hover:underline"
+                    >
+                      {post.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
-              <div className="bg-gray-100 px-6 py-6 space-y-4">
-                {posts.slice(0, 10).map(p => (
-                  <Link
-                    key={p.slug}
-                    href={`/blog/${p.slug}`}
-                    className="block text-blue-800 hover:underline"
-                  >
-                    {p.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </aside>
+            </aside>
         </div>
       </section>
 
