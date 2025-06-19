@@ -69,13 +69,7 @@ export default function BookNowModal({
               type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors"
             >
-              Check Visa
-            </button>
-            <button
-              type="button"
-              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-3 rounded-xl font-semibold transition-colors"
-            >
-              Book a Call
+              Submit
             </button>
           </div>
         </form>
