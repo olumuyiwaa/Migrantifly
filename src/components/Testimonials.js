@@ -143,7 +143,7 @@ export default function Testimonials() {
               className={`flex ${isDragging ? '' : 'transition-transform duration-700 ease-in-out'} cursor-grab active:cursor-grabbing`}
               style={{
                 transform: `translateX(${getTransform()}%)`,
-                width: `${(100 / cardsToShow)}%`,
+                width: `${100}%`,
               }}
               onMouseDown={handleDragStart}
               onTouchStart={handleDragStart}
