@@ -37,7 +37,14 @@ export default function Testimonials() {
 
   const [cardsToShow, setCardsToShow] = useState(getCardsToShow);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const sliderRef = useRef(null);
+
+  // Drag state
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
 
   // Calculate total slides based on current cardsToShow
   const totalSlides = Math.max(1, testimonials.length - cardsToShow + 1);
@@ -56,26 +63,106 @@ export default function Testimonials() {
 
   // Auto-slide functionality
   useEffect(() => {
+    if (!isAutoPlaying) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
         const nextIndex = prev + 1;
-        // If we've reached the end, go back to the beginning
         if (nextIndex >= totalSlides) {
           return 0;
         }
         return nextIndex;
       });
-    }, 4000); // Reduced to 4 seconds for smoother experience
+    }, 4000);
 
     return () => clearInterval(interval);
-  }, [totalSlides]);
+  }, [totalSlides, isAutoPlaying]);
+
+  // Drag handlers
+  const handleDragStart = (e) => {
+    setIsDragging(true);
+    setIsAutoPlaying(false); // Stop auto-play when dragging
+    const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+    setStartX(clientX);
+    setCurrentX(clientX);
+
+    // Prevent text selection during drag
+    e.preventDefault();
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragging) return;
+
+    const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+    setCurrentX(clientX);
+    const diff = clientX - startX;
+    setDragOffset(diff);
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+
+    setIsDragging(false);
+    const diff = currentX - startX;
+    const threshold = 50; // Minimum drag distance to trigger slide change
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && currentIndex > 0) {
+        // Dragged right, go to previous slide
+        setCurrentIndex(prev => prev - 1);
+      } else if (diff < 0 && currentIndex < totalSlides - 1) {
+        // Dragged left, go to next slide
+        setCurrentIndex(prev => prev + 1);
+      }
+    }
+
+    setDragOffset(0);
+
+    // Resume auto-play after a delay
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 2000);
+  };
+
+  // Mouse event handlers
+  useEffect(() => {
+    const handleMouseMove = (e) => handleDragMove(e);
+    const handleMouseUp = () => handleDragEnd();
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, startX, currentX, currentIndex, totalSlides]);
 
   const prev = () => {
     setCurrentIndex((prev) => prev === 0 ? totalSlides - 1 : prev - 1);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 2000);
   };
 
   const next = () => {
     setCurrentIndex((prev) => prev >= totalSlides - 1 ? 0 : prev + 1);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 2000);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 2000);
+  };
+
+  // Calculate transform with drag offset
+  const getTransform = () => {
+    const baseTransform = -currentIndex * (100 / cardsToShow);
+    const dragTransform = isDragging ? (dragOffset / sliderRef.current?.offsetWidth) * 100 : 0;
+    return baseTransform + dragTransform;
   };
 
   return (
@@ -113,19 +200,23 @@ export default function Testimonials() {
           <div className="overflow-hidden rounded-2xl">
             <div
               ref={sliderRef}
-              className="flex transition-transform duration-700 ease-in-out"
+              className={`flex ${isDragging ? '' : 'transition-transform duration-700 ease-in-out'} cursor-grab active:cursor-grabbing`}
               style={{
-                transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
+                transform: `translateX(${getTransform()}%)`,
                 width: `${testimonials.length * (100 / cardsToShow)}%`,
               }}
+              onMouseDown={handleDragStart}
+              onTouchStart={handleDragStart}
+              onTouchMove={handleDragMove}
+              onTouchEnd={handleDragEnd}
             >
               {testimonials.map((testimonial, idx) => (
                 <div
                   key={idx}
                   className="flex-shrink-0 px-2 sm:px-3 lg:px-4"
-                  style={{ width: `${100 / testimonials.length}%` }}
+                  style={{ width: `${100 /cardsToShow}%` }}
                 >
-                  <div className="bg-yellow-300 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col min-h-[280px] sm:min-h-[320px]">
+                  <div className="bg-yellow-300 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col min-h-[280px] sm:min-h-[320px] select-none">
                     {/* Quote Icon and Divider */}
                     <div className="flex items-center mb-4 sm:mb-6">
                       <svg className="w-6 h-6 sm:w-8 sm:h-8 text-gray-700 mr-3 sm:mr-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -157,7 +248,7 @@ export default function Testimonials() {
             {Array.from({ length: totalSlides }).map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setCurrentIndex(idx)}
+                onClick={() => goToSlide(idx)}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors duration-200 ${
                   idx === currentIndex ? 'bg-yellow-500' : 'bg-gray-300 hover:bg-gray-400'
                 }`}
