@@ -40,7 +40,6 @@ export default function Blog() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  // Professional placeholder image showing people in consultation/meeting
                   <div className="w-full h-full bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 flex items-center justify-center relative">
                     {/* Background pattern */}
                     <div className="absolute inset-0 opacity-10">

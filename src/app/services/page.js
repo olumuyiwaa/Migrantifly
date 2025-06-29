@@ -106,7 +106,7 @@ export default function Services() {
 
       {/* Enhanced Hero Section */}
       <div className="relative bg-gradient-to-br from-slate-800 via-slate-700 to-blue-900 py-20 min-h-[60vh] overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/bg.png')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('/images/bg.png')] bg-cover bg-center"></div>
 
         {/* Animated background elements */}
         <div className="absolute inset-0">
