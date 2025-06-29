@@ -347,11 +347,12 @@ export default function Services() {
               <div className="relative h-[500px] flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"></div>
                 <div className="relative">
-                  <div className="w-240 h-240 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full border border-white/20 flex items-center justify-center mb-4">
+                  <div className="w-[240px] h-[240px] bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full border border-white/20 flex items-center justify-center mb-4">
                     <img
                       src="/images/about2.png"
                       alt="Migration Consultant"
-                      className="w-200 h-200 object-cover rounded-full shadow-2xl"
+                      className="w-[200px] h-[200px] object-cover rounded-full shadow-2xl"
+                      loading="lazy"
                     />
                   </div>
                   <div className="text-center mt-6">
