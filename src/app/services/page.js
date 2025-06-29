@@ -10,7 +10,7 @@ export default function Services() {
       slug: 'skilled-migration-visas',
       title: "Skilled Migration Visas",
       description: "Move abroad based on your skills, qualifications, and work experience.",
-      icon: "🎯",
+      icon: "🏢",
       features: [
         "General Skilled Migration",
         "Employer Sponsored Visas",
@@ -36,7 +36,7 @@ export default function Services() {
       slug: 'family-partner-visas',
       title: "Family & Partner Visas",
       description: "Reunite with your loved ones and build a future together.",
-      icon: "👨‍👩‍👧‍👦",
+      icon: "❤️",
       features: [
         "Partner Visas",
         "Parent Visas",
@@ -48,12 +48,6 @@ export default function Services() {
   ];
 
   const visaTypes = [
-    {
-      title: "Employer Sponsorship Visa",
-      description: "Get sponsored by an approved employer",
-      icon: "🏢",
-      color: "from-blue-600 to-blue-700"
-    },
     {
       title: "Skilled Independent Visa",
       description: "Migrate based on your skills and qualifications",
@@ -237,24 +231,6 @@ export default function Services() {
               ))}
             </div>
           )}
-
-          {/* Enhanced Visa Types */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {visaTypes.map((visa, index) => (
-              <div key={index} className={`bg-gradient-to-br ${visa.color} text-white rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group`}>
-                <div className="text-center">
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {visa.icon}
-                  </div>
-                  <h3 className="font-bold text-lg mb-3">{visa.title}</h3>
-                  <p className="text-sm opacity-90 mb-6">{visa.description}</p>
-                  <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-6 py-2 rounded-lg font-semibold transition-all duration-300 border border-white/30">
-                    Learn More
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
