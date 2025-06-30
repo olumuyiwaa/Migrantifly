@@ -13,8 +13,7 @@ export default function Hero() {
     playsInline
     className="absolute inset-0 w-full h-full object-cover z-0"
   >
-    <source src="/path-to-your-video.mp4" type="video/mp4" />
-    <source src="/path-to-your-video.webm" type="video/webm" />
+    <source src="/MigrationJourney.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
   
