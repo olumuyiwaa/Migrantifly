@@ -6,7 +6,26 @@ export default function BookNowModal({
   formData,
   onInputChange,
   onSubmit,
-  visaTypes = [],
+  visaTypes = [
+    {
+      title: "Skilled Independent Visa",
+      description: "Migrate based on your skills and qualifications",
+      icon: "⚡",
+      color: "from-green-600 to-green-700"
+    },
+    {
+      title: "Student Visa",
+      description: "Study at world-class institutions",
+      icon: "📚",
+      color: "from-purple-600 to-purple-700"
+    },
+    {
+      title: "Family Reunion Visa",
+      description: "Bring your family together",
+      icon: "❤️",
+      color: "from-pink-600 to-pink-700"
+    }
+  ],
 }) {
   if (!show) return null;
 
