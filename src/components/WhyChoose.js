@@ -38,7 +38,7 @@ export default function WhyChoose() {
                 <img
                   src={feature.icon}
                   alt={feature.title}
-                  className="w-[224px] h-[224px] object-contain"
+                  className="h-[224px] object-contain"
                 />
               </div>
               <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
