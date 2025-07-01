@@ -31,7 +31,7 @@ export default function MigrationProcess() {
             {/* Big circle */}
             <div className="absolute w-[400px] h-[400px] bg-[#D9D9D9] rounded-full left-0 top-0 z-0">
               <img
-                src=""
+                src="/images/features/migration1.png"
                 alt=""
                 className="w-full h-full object-contain rounded-full"
               />
@@ -40,7 +40,7 @@ export default function MigrationProcess() {
             {/* Small circle */}
             <div className="absolute w-[224px] h-[224px] bg-[#B3B3B3] rounded-full left-40 top-64">
               <img
-                src=""
+                src="/images/features/migration.png"
                 alt=""
                 className="w-full h-full object-contain rounded-full"
               />
