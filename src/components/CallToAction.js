@@ -23,7 +23,7 @@ export default function CallToAction() {
         <div className="w-full md:w-1/2 flex justify-center md:justify-end mt-12 md:mt-0">
           <div className="rounded-full bg-blue-600" style={{ width: 320, height: 320 }}>
           <img
-            src=""
+            src="/images/features/migration1.png"
             alt=""
             className="w-full h-full object-contain rounded-full"
           />
