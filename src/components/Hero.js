@@ -32,13 +32,13 @@ export default function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
-            href="/services"
+            href="/contact"
             className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-center transition-colors"
           >
-            Book Now
+            Contact Us
           </Link>
           <Link
-            href="/contact"
+            href="/services"
             className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg font-semibold text-center transition-colors"
           >
             Check Eligibility

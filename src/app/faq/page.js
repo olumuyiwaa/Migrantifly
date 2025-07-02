@@ -141,12 +141,18 @@ export default function FAQ() {
             Can't find what you're looking for? Our migration specialists are here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-primary-600 hover:bg-primary-700 px-8 py-3 rounded-lg font-semibold transition-colors">
-              Contact Us
-            </button>
-            <button className="border border-white text-white hover:bg-white hover:text-primary-900 px-8 py-3 rounded-lg font-semibold transition-colors">
-              Book a Call
-            </button>
+            <Link
+                href="/contact"
+                className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-center transition-colors"
+              >
+                Contact Us
+              </Link>
+              <Link
+                href="/services"
+                className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg font-semibold text-center transition-colors"
+              >
+                Check Eligibility
+              </Link>
           </div>
         </div>
       </div>

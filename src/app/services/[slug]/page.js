@@ -198,9 +198,11 @@ export default function ServiceDetail({ params }) {
               <p className="text-blue-100 text-sm mb-4">
                 Get personalized guidance from our migration experts.
               </p>
-              <button className="w-full bg-white text-blue-600 font-semibold py-2 px-4 rounded hover:bg-gray-100 transition-colors">
-                Contact Us Today
-              </button>
+              <Link
+              href="/contact"
+              className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-center transition-colors">
+              Contact Us Today
+            </Link>
             </div>
           </aside>
         </div>

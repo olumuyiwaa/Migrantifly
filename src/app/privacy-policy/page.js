@@ -165,9 +165,12 @@ export default function PrivacyPolicy() {
           <p className="text-xl text-blue-100 mb-8">
             We're committed to transparency and protecting your privacy.
           </p>
-          <button className="bg-primary-600 hover:bg-primary-700 px-8 py-3 rounded-lg font-semibold transition-colors">
-            Contact Us
-          </button>
+          <Link
+              href="/contact"
+              className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-center transition-colors"
+            >
+              Contact Us
+            </Link>
         </div>
       </div>
 

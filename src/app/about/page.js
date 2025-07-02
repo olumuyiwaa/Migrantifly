@@ -176,12 +176,18 @@ export default function About() {
             Start with a free assessment or talk to one of our migration specialists today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-primary-600 hover:bg-primary-700 px-8 py-3 rounded-lg font-semibold transition-colors">
-              Check Visa
-            </button>
-            <button className="border border-white text-white hover:bg-white hover:text-primary-900 px-8 py-3 rounded-lg font-semibold transition-colors">
-              Book a Call
-            </button>
+          <Link
+            href="/contact"
+            className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-center transition-colors"
+          >
+            Contact Us
+          </Link>
+          <Link
+            href="/services"
+            className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg font-semibold text-center transition-colors"
+          >
+            Check Eligibility
+          </Link>
           </div>
         </div>
       </div>

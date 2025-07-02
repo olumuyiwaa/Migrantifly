@@ -11,12 +11,18 @@ export default function CallToAction() {
             Book a free consultation or explore your visa options now.
           </p>
           <div className="flex gap-4 justify-center md:justify-start">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-xl transition-colors shadow">
-              Check Visa
-            </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-primary-900 px-8 py-4 rounded-full font-semibold text-xl transition-colors shadow">
-              Book a Call
-            </button>
+          <Link
+            href="/contact"
+            className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-center transition-colors"
+          >
+            Contact Us
+          </Link>
+          <Link
+            href="/services"
+            className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg font-semibold text-center transition-colors"
+          >
+            Check Eligibility
+          </Link>
           </div>
         </div>
         {/* Right Side */}
