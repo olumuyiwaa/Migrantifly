@@ -99,12 +99,16 @@ export default function Contact() {
                   type="submit"
                   className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors"
                 >
-                  Check Visa
+                  Subscribe
                 </button>
               </form>
             </div>
 
-            <div className="text-center">
+            <div className="text-center items-center">
+            <div className="flex items-center mb-6">
+              <img src="/logo/logo.png" alt="Migrantifly" className="w-24 h-24 rounded mr-2"/>
+              <span className="text-xl font-bold">Migrantifly</span>
+            </div>
               <h3 className="text-xl font-semibold mb-2">Subscribe to our newsletter</h3>
               <h2 className="text-3xl font-bold text-primary-600 mb-8">
                 To get the latest immigration and Visa news
