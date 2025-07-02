@@ -105,9 +105,8 @@ export default function Contact() {
             </div>
 
             <div className="text-center items-center">
-            <div className="flex items-center mb-6">
-              <img src="/logo/logo.png" alt="Migrantifly" className="w-24 h-24 rounded mr-2"/>
-              <span className="text-xl font-bold">Migrantifly</span>
+            <div className="mb-6">
+              <img src="/logo/logo.png" alt="Migrantifly" className="w-24 h-24 rounded"/>
             </div>
               <h3 className="text-xl font-semibold mb-2">Subscribe to our newsletter</h3>
               <h2 className="text-3xl font-bold text-primary-600 mb-8">
