@@ -109,7 +109,7 @@ export default function Contact() {
                 <img
                   src="/logo/logo.png"
                   alt="Migrantifly"
-                  className="w-24 h-24 rounded-full object-cover"
+                  className="w-24 h-24 rounded object-cover"
                 />
               </div>
               <h3 className="text-xl font-semibold mb-2">
