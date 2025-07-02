@@ -63,12 +63,12 @@ export default function Contact() {
                   className="w-full px-4 py-3 bg-gray-100 rounded-lg border-0 focus:ring-2 focus:ring-primary-500"
                 ></textarea>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button
+                 {/* <button
                     type="submit"
                     className="flex-1 bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors"
                   >
                     Check Visa
-                  </button>
+                  </button>*/}
                   <button
                     type="button"
                     className="flex-1 border border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white py-3 rounded-lg font-semibold transition-colors"
