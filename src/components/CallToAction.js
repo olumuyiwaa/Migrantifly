@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function CallToAction() {
   return (
     <section className="bg-primary-900 py-20">
