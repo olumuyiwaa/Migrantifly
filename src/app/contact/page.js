@@ -104,12 +104,18 @@ export default function Contact() {
               </form>
             </div>
 
-            <div className="text-center items-center">
-            <div className="mb-6">
-              <img src="/logo/logo.png" alt="Migrantifly" className="w-24 h-24 rounded"/>
-            </div>
-              <h3 className="text-xl font-semibold mb-2">Subscribe to our newsletter</h3>
-              <h2 className="text-3xl font-bold text-primary-600 mb-8">
+            <div className="flex flex-col items-center text-center py-10 px-4 bg-white">
+              <div className="mb-6">
+                <img
+                  src="/logo/logo.png"
+                  alt="Migrantifly"
+                  className="w-24 h-24 rounded-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                Subscribe to our newsletter
+              </h3>
+              <h2 className="text-3xl font-bold text-primary-600 mb-6 max-w-xl">
                 To get the latest immigration and Visa news
               </h2>
             </div>
