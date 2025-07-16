@@ -12,20 +12,19 @@ export default function Footer() {
               <span className="text-xl font-bold">Migrantifly</span>
             </div>
             <p className="text-blue-100 mb-6">
-              Lorem ipsum dolor sit amet consectetur to sed magna nihil sagittis sit Lorem Akwa Ibom, Nigeria
-            </p>
+                From dreaming to thriving — we guide you through every step of your migration journey.            </p>
             <div className="space-y-2 text-sm">
               <div className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
-                <span>Uyo, Akwa Ibom, Nigeria</span>
+                <span>16 Nandi Lane, Ranui, Auckland, New Zealand </span>
               </div>
-              <div className="flex items-center">
+             {/* <div className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
                 <span>+234 xxx xxx xxxx</span>
-              </div>
+              </div>*/}
               <div className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                <span>info@migrantifly.com</span>
+                <span>Migrantifly@gmail.com</span>
               </div>
             </div>
           </div>
@@ -62,11 +61,23 @@ export default function Footer() {
             © Copyright Migrantifly. All rights reserved.
           </div>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <img src="/logo/x.png" alt="x" className="w-6 h-6 rounded mr-2 filter invert brightness-0"/>
-            <img src="/logo/facebook.png" alt="facebook" className="w-6 h-6 rounded mr-2 filter invert brightness-0"/>
-            <img src="/logo/linkedin.png" alt="linkedin" className="w-6 h-6 rounded mr-2 filter invert brightness-0"/>
-            <img src="/logo/insta.png" alt="instagram" className="w-6 h-6 rounded mr-2 filter invert brightness-0"/>
+            <a href="https://x.com/migrantifly" target="_blank" rel="noopener noreferrer">
+              <img src="/logo/x.png" alt="X (Twitter)" className="w-6 h-6 rounded mr-2 filter invert brightness-0" />
+            </a>
+            <a href="https://www.facebook.com/Migrantifly" target="_blank" rel="noopener noreferrer">
+              <img src="/logo/facebook.png" alt="Facebook" className="w-6 h-6 rounded mr-2 filter invert brightness-0" />
+            </a>
+           <a href="https://linkedin.com/in/migrantifly" target="_blank" rel="noopener noreferrer">
+              <img src="/logo/linkedin.png" alt="LinkedIn" className="w-6 h-6 rounded mr-2 filter invert brightness-0" />
+            </a>
+            <a href="https://www.instagram.com/migrantifly" target="_blank" rel="noopener noreferrer">
+              <img src="/logo/insta.png" alt="Instagram" className="w-6 h-6 rounded mr-2 filter invert brightness-0" />
+            </a>
+            <a href="https://www.tiktok.com/@migrantifly" target="_blank" rel="noopener noreferrer">
+              <img src="/logo/tiktok.png" alt="Tiktok" className="w-6 h-6 rounded mr-2 filter invert brightness-0" />
+            </a>
           </div>
+
         </div>
       </div>
 

@@ -29,10 +29,23 @@ export default function Contact() {
               <div className="mb-8">
                 <h3 className="text-xl font-semibold mb-4">Follow us</h3>
                 <div className="flex space-x-4">
-                  <img src="/logo/x.png" alt="x" className="w-10 h-10 rounded mr-2"/>
-                  <img src="/logo/facebook.png" alt="faceboo" className="w-10 h-10 rounded mr-2"/>
-                  <img src="/logo/linkedin.png" alt="linkedin" className="w-10 h-10 rounded mr-2"/>
-                  <img src="/logo/insta.png" alt="instagram" className="w-10 h-10 rounded mr-2"/>
+
+                  <a href="https://x.com/migrantifly" target="_blank" rel="noopener noreferrer">
+                    <img src="/logo/x.png" alt="x" className="w-10 h-10 rounded mr-2"/>
+                  </a>
+                  <a href="https://www.facebook.com/Migrantifly" target="_blank" rel="noopener noreferrer">
+                      <img src="/logo/facebook.png" alt="faceboo" className="w-10 h-10 rounded mr-2"/>
+                    </a>
+                  <a href="https://linkedin.com/in/migrantifly" target="_blank" rel="noopener noreferrer">
+                    <img src="/logo/linkedin.png" alt="linkedin" className="w-10 h-10 rounded mr-2"/>
+                  </a>
+                    <a href="https://www.tiktok.com/@migrantifly" target="_blank" rel="noopener noreferrer">
+                      <img src="/logo/tiktok.png" alt="Tiktok" className="w-10 h-10 rounded mr-2" />
+                    </a>
+                    <a href="https://www.instagram.com/migrantifly" target="_blank" rel="noopener noreferrer">
+                      <img src="/logo/insta.png" alt="instagram" className="w-10 h-10 rounded mr-2"/>
+                    </a>
+
                 </div>
               </div>
             </div>
@@ -149,15 +162,15 @@ export default function Contact() {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <MapPin className="w-5 h-5 mr-3 text-gold-400" />
-                  <span className="text-xl">Uyo, Akwa Ibom, Nigeria</span>
+                  <span className="text-xl">16 Nandi Lane, Ranui, Auckland, New Zealand</span>
                 </div>
-                <div className="flex items-center">
+               {/*  <div className="flex items-center">
                   <Phone className="w-5 h-5 mr-3 text-gold-400" />
                   <span className="text-xl">+234 xxx xxx xxxx</span>
-                </div>
+                </div> */}
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 mr-3 text-gold-400" />
-                  <span className="text-xl">info@migrantifly.com</span>
+                  <span className="text-xl">Migrantifly@gmail.com</span>
                 </div>
               </div>
             </div>
