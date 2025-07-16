@@ -142,8 +142,8 @@ export default function Contact() {
             <div className="bg-white rounded-lg p-4">
               <div className="rounded-lg overflow-hidden h-64 w-full">
                 <iframe
-                  title="Uyo, Akwa Ibom, Nigeria Map"
-                  src="https://www.google.com/maps?q=Uyo,+Akwa+Ibom,+Nigeria&output=embed"
+                  title="16 Nandi Lane, Ranui, Auckland, New Zealand"
+                  src="https://www.google.com/maps?q=16+Nandi+Lane,+Ranui,+Auckland,+New+Zealand&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
