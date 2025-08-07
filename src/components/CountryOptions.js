@@ -1,40 +1,22 @@
 export default function CountryOptions() {
   const countries = [
-    {
-      name: "USA",
-      flag: "🇺🇸",
-      description:
-        "Explore a wide range of immigration opportunities in the United States, including work, study, and family-based visa programs designed for professionals, students, and families seeking a better future.",
-    },
-    {
-      name: "UK",
-      flag: "🇬🇧",
-      description:
-        "Discover multiple immigration pathways to the United Kingdom, from skilled worker visas to student routes and permanent settlement options for those looking to live, work, or study in the UK.",
-    },
-    {
-      name: "Brazil",
-      flag: "🇧🇷",
-      description:
-        "Learn about Brazil’s growing immigration programs, offering residency options for remote workers, entrepreneurs, and investors interested in experiencing life in South America’s largest economy.",
-    },
   {
-    name: "Canada",
-    flag: "🇨🇦",
+    name: "New Zealand",
+    flag: "🇳🇿",
     description:
-      "Explore Canada’s inclusive immigration system, with options like Express Entry, Provincial Nominee Programs (PNPs), and pathways for students, skilled workers, and family sponsorships.",
+      "Discover New Zealand’s welcoming immigration options for skilled professionals, students, and families—offering a balanced lifestyle, natural beauty, and long-term residency pathways.",
+  },
+  {
+    name: "Fiji",
+    flag: "🇫🇯",
+    description:
+      "Discover the tropical paradise of Fiji, with its crystal-clear waters, coral reefs, and lush forests. Explore opportunities for tourism, investment, and cultural exchange in this Pacific island nation.",
   },
   {
     name: "Australia",
     flag: "🇦🇺",
     description:
       "Learn about Australia’s diverse immigration streams, including skilled migration, employer sponsorship, student visas, and permanent residency for those seeking a new life Down Under.",
-  },
-  {
-    name: "New Zealand",
-    flag: "🇳🇿",
-    description:
-      "Discover New Zealand’s welcoming immigration options for skilled professionals, students, and families—offering a balanced lifestyle, natural beauty, and long-term residency pathways.",
   },
   ];
 

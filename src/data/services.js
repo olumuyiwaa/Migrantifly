@@ -1,259 +1,331 @@
-// src/data/services.js
 const services = [
   {
-    slug: 'skilled-migration-visas',
-    title: 'Skilled Migration Visas',
-    description: 'Move abroad based on your skills, qualifications, and work experience.',
-    excerpt: 'Discover pathways to migrate based on your professional skills and qualifications. Our comprehensive skilled migration services help you navigate complex visa requirements.',
-    image: '/images/skilled-migration.jpg',
-    imageAlt: 'Professional skilled worker consultation',
-    icon: '🎯',
+    slug: 'visitor-visas',
+    title: 'Visitor Visas',
+    description: 'For tourism, family visits, medical reasons, or short-term activities.',
+    excerpt: 'Travel to New Zealand for holidays, family reunions, business, or medical treatment. We help you choose the right visitor visa for your needs.',
+    image: '/images/visitor-visa.jpg',
+    imageAlt: 'Tourists enjoying a scenic destination',
+    icon: '🧳',
     features: [
-      'General Skilled Migration',
-      'Employer Sponsored Visas',
-      'Regional Opportunities'
+      'Tourism & Family Visits',
+      'Business Visitor Visa',
+      'Medical & Cultural Visas'
     ],
-    metaDescription: 'Expert skilled migration visa services. Move abroad based on your skills, qualifications, and work experience with our professional guidance.',
+    metaDescription: 'Travel to New Zealand with the right visitor visa. We support tourism, business, medical, and cultural visit applications.',
     content: {
-      introduction: 'Skilled migration represents one of the most popular pathways for professionals seeking to build a new life abroad. Whether you\'re a healthcare professional, engineer, IT specialist, or tradesperson, skilled migration visas offer opportunities to live and work permanently in your destination country.',
+      introduction: 'Visitor visas are for individuals who want to stay temporarily in New Zealand for non-work, non-study purposes such as tourism, visiting family, short business trips, attending cultural events, or medical treatment.',
       sections: [
         {
-          title: 'General Skilled Migration (GSM)',
-          content: 'The General Skilled Migration program allows skilled workers to migrate without requiring employer sponsorship. This pathway is ideal for professionals whose occupations are listed on the relevant skilled occupation lists and who can demonstrate their qualifications and experience meet the required standards.\n\nKey requirements typically include:\n• Age requirements (usually under 45 years)\n• English language proficiency\n• Skills assessment from relevant authority\n• Points-based selection criteria\n• Health and character requirements',
+          title: 'General Visitor Visas',
+          content: 'These are ideal for tourists, family visits, and general short stays. Categories include:\n• General Visitor Visa\n• Partner or Parent of a New Zealander Visitor Visa\n• Grandparent Visitor Visa\n• Transit Visa\n• Business Visitor Visa',
           subsections: [
             {
-              subtitle: 'Eligibility Assessment',
-              details: 'We conduct comprehensive eligibility assessments to determine your prospects under various skilled migration categories and help you understand the points system.'
+              subtitle: 'Tourism & Family Visit Applications',
+              details: 'We assist with preparing travel plans, showing ties to home country, and documenting invitation letters for family visits.'
             },
             {
-              subtitle: 'Skills Assessment',
-              details: 'Our team guides you through the skills assessment process with relevant assessing authorities, ensuring your qualifications are properly recognized.'
+              subtitle: 'Short-Term Business',
+              details: 'Includes conference attendance, trade shows, or short-term negotiations.'
             }
           ]
         },
         {
-          title: 'Employer Sponsored Visas',
-          content: 'Employer sponsorship provides a direct pathway to permanent residence through job offers from approved employers. These visas often have more favorable requirements compared to independent skilled migration.\n\nBenefits include:\n• Direct pathway to permanent residence\n• Family inclusion in application\n• Access to social services and benefits\n• Pathway to citizenship\n• No points test requirement',
+          title: 'Medical and Special-Purpose Visas',
+          content: 'For those traveling for medical treatment, attending cultural events, or other unique temporary reasons.',
           subsections: [
             {
-              subtitle: 'Temporary Skilled Visas',
-              details: 'Initial temporary visas that can lead to permanent residence, allowing you to work for your sponsoring employer while building your case for permanency.'
+              subtitle: 'Medical Treatment Visitor Visa',
+              details: 'Requires proof of treatment plan and financial ability to pay for care.'
             },
             {
-              subtitle: 'Permanent Employer Sponsored',
-              details: 'Direct permanent residence visas for skilled workers with job offers from approved employers in eligible occupations.'
-            }
-          ]
-        },
-        {
-          title: 'Regional Migration Opportunities',
-          content: 'Regional migration programs offer additional pathways and benefits for those willing to live and work in designated regional areas. These programs often feature:\n\n• Lower points requirements\n• Priority processing\n• Additional points for regional study or work\n• Pathways to permanent residence\n• Access to regional job markets',
-          subsections: [
-            {
-              subtitle: 'Regional Nominated Visas',
-              details: 'State and territory governments nominate skilled workers for regional areas, often with more favorable criteria than general skilled migration.'
-            },
-            {
-              subtitle: 'Regional Benefits',
-              details: 'Living in regional areas can provide additional migration benefits, priority processing, and unique lifestyle opportunities.'
+              subtitle: 'Culturally Arranged Marriage & Event Visas',
+              details: 'Visas for those participating in cultural ceremonies, arts, music, or sports events.'
             }
           ]
         }
       ],
-      conclusion: 'Skilled migration offers multiple pathways to achieve your goal of living and working abroad. Our experienced team will assess your individual circumstances and guide you through the most suitable visa option for your situation.',
+      conclusion: 'Whether you’re a tourist or visiting for a specific event or treatment, we help you choose the right visitor visa and guide you through a smooth application.',
       checklist: [
-        'Skills assessment completed',
-        'English language test results obtained',
-        'Educational qualifications assessed',
-        'Work experience documented',
-        'Health examinations completed',
-        'Police clearances obtained',
-        'Points calculation verified',
-        'Expression of Interest submitted'
+        'Purpose of visit identified',
+        'Travel itinerary prepared',
+        'Accommodation and finances confirmed',
+        'Supporting documents collected',
+        'Visa application submitted'
       ]
     },
     processSteps: [
-      'Initial consultation and eligibility assessment',
-      'Skills assessment and documentation',
-      'Expression of Interest submission',
-      'Invitation to apply received',
-      'Complete visa application lodged',
-      'Additional documentation provided',
-      'Visa decision received'
+      'Initial consultation and visa type matching',
+      'Document gathering and review',
+      'Application preparation and submission',
+      'Biometrics/interview (if required)',
+      'Decision and travel planning'
     ],
-    countries: ['Australia', 'Canada', 'New Zealand', 'United Kingdom'],
-    processingTime: '6-12 months',
-    author: 'Sarah Migration Expert'
+    countries: ['New Zealand'],
+    processingTime: '2–6 weeks',
+    author: 'Daniel Visa Advisor'
   },
   {
     slug: 'student-visas',
     title: 'Student Visas',
-    description: 'Study abroad with support on visa applications and education pathways.',
-    excerpt: 'Transform your future through international education. We provide comprehensive support for student visa applications and help you choose the right educational pathway.',
+    description: 'Study full-time or part-time in New Zealand at approved institutions.',
+    excerpt: 'Pursue education in New Zealand with expert guidance on student visa applications, school admissions, and post-study pathways.',
     image: '/images/student-visa.jpg',
     imageAlt: 'International students on campus',
     icon: '🎓',
     features: [
-      'University Admissions',
-      'Visa Application Assistance',
-      'Post-Study Work Options'
+      'Fee-Paying Student Visas',
+      'Pathway & Dependent Student Visas',
+      'Post-Study Planning'
     ],
-    metaDescription: 'Expert student visa services. Study abroad with comprehensive support on visa applications, university admissions, and education pathways.',
+    metaDescription: 'Study in New Zealand with tailored student visa services and pathway planning.',
     content: {
-      introduction: 'Studying abroad opens doors to world-class education, cultural experiences, and future career opportunities. Our student visa services provide comprehensive support from choosing the right course to securing your visa and planning your post-study options.',
+      introduction: 'Student visas allow you to pursue full-time or part-time studies in New Zealand, and in many cases include post-study work options and dependent family support.',
       sections: [
         {
-          title: 'University Admissions Support',
-          content: 'Choosing the right educational institution and program is crucial for your success. We provide guidance on:\n\n• Course selection based on career goals\n• University rankings and reputation\n• Entry requirements and application processes\n• Scholarship opportunities\n• Academic English requirements\n• Pre-departure preparation',
+          title: 'Study Visa Categories',
+          content: 'Explore visa types including:\n• Fee-Paying Student Visa\n• Exchange Student Visa\n• Pathway Student Visa\n• Foreign Government Sponsored Visa\n• Dependent Child Student Visa\n• Domestic Student Visa (specific cases)',
           subsections: [
             {
-              subtitle: 'Course Selection',
-              details: 'We help you identify courses that align with your career goals and provide pathways to future migration opportunities.'
+              subtitle: 'Fee-Paying & Exchange Students',
+              details: 'Most common student visa for international study. We assist with school selection and documentation.'
             },
             {
-              subtitle: 'Institution Assessment',
-              details: 'Our team evaluates educational institutions based on quality, location, costs, and post-study opportunities.'
+              subtitle: 'Pathway & Government Sponsored',
+              details: 'Combine multiple programs under one visa or apply through scholarship/funding support.'
             }
           ]
         },
         {
-          title: 'Visa Application Process',
-          content: 'Student visa applications require careful preparation and documentation. Our comprehensive service includes:\n\n• Genuine Temporary Entrant (GTE) statement preparation\n• Financial capacity documentation\n• Health insurance arrangements\n• English language requirement compliance\n• Character and health assessments\n• Visa condition explanations',
+          title: 'Post-Study Work Planning',
+          content: 'Graduates may be eligible for work visas based on their course of study.',
           subsections: [
             {
-              subtitle: 'Documentation Preparation',
-              details: 'We ensure all required documents are properly prepared, certified, and submitted according to visa office requirements.'
+              subtitle: 'Post-Study Work Visa',
+              details: 'Gain local experience and open doors to skilled migration.'
             },
             {
-              subtitle: 'Interview Preparation',
-              details: 'When required, we provide comprehensive interview preparation to help you present your case confidently.'
-            }
-          ]
-        },
-        {
-          title: 'Post-Study Work Opportunities',
-          content: 'Many countries offer post-study work rights that can lead to permanent residence. We help you understand and plan for:\n\n• Post-study work visa eligibility\n• Work rights during studies\n• Pathways to permanent residence\n• Skill development opportunities\n• Graduate employer networks\n• Career planning and job search strategies',
-          subsections: [
-            {
-              subtitle: 'Work Rights Planning',
-              details: 'Understanding your work rights during and after studies helps maximize your investment in international education.'
-            },
-            {
-              subtitle: 'Migration Pathways',
-              details: 'We identify how your chosen course of study can lead to future skilled migration opportunities.'
+              subtitle: 'Transition to Residence',
+              details: 'We help you plan migration strategies based on qualifications earned.'
             }
           ]
         }
       ],
-      conclusion: 'International education is an investment in your future that can open doors to global career opportunities and potential permanent residence. Let us guide you through every step of the process.',
+      conclusion: 'Education is a powerful migration and career tool. Let us help you make the right choices and secure your student visa.',
       checklist: [
-        'Course and institution selected',
-        'Admission letter received',
-        'English language requirements met',
-        'Financial capacity demonstrated',
-        'Health insurance arranged',
-        'GTE statement prepared',
-        'Visa application lodged',
-        'Pre-departure preparation completed'
+        'Course selected',
+        'Admission confirmed',
+        'GTE and financial docs prepared',
+        'Health and insurance arranged',
+        'Visa lodged'
       ]
     },
     processSteps: [
-      'Initial consultation and course selection',
-      'University application submission',
+      'Consultation and education planning',
+      'University or institution application',
       'Admission letter received',
-      'Student visa application preparation',
-      'Visa application lodged',
-      'Visa approval and pre-departure',
-      'Arrival and orientation support'
+      'Visa application submission',
+      'Visa approval and pre-departure planning'
     ],
-    countries: ['Australia', 'Canada', 'United Kingdom', 'United States', 'New Zealand'],
-    processingTime: '4-8 weeks',
+    countries: ['New Zealand'],
+    processingTime: '4–8 weeks',
     author: 'Michael Education Consultant'
   },
   {
-    slug: 'family-partner-visas',
-    title: 'Family & Partner Visas',
-    description: 'Reunite with your loved ones and build a future together.',
-    excerpt: 'Keep your family together across borders. Our family and partner visa services help you reunite with loved ones and build a future together in your new country.',
-    image: '/images/family-visa.jpg',
-    imageAlt: 'Happy family reunion',
-    icon: '👨‍👩‍👧‍👦',
+    slug: 'work-visas',
+    title: 'Work Visas',
+    description: 'Work temporarily in New Zealand for a specific employer or sector.',
+    excerpt: 'Explore New Zealand work visas for skilled workers, graduates, and seasonal employees. We match your skills with the right visa route.',
+    image: '/images/skilled-migration.jpg',
+    imageAlt: 'Professional at a job site',
+    icon: '💼',
     features: [
-      'Partner Visas',
-      'Parent Visas',
-      'Child Visas'
+      'Accredited Employer Work Visas',
+      'Working Holiday & Event Visas',
+      'Seasonal & Sector-Specific Options'
     ],
-    metaDescription: 'Expert family and partner visa services. Reunite with your loved ones and build a future together with our comprehensive family migration support.',
+    metaDescription: 'Work in New Zealand with our tailored visa services for skilled, graduate, and temporary workers.',
     content: {
-      introduction: 'Family unity is a fundamental principle of migration programs worldwide. Whether you\'re looking to bring your partner, children, parents, or other family members to join you, we provide compassionate and expert guidance through complex family visa processes.',
+      introduction: 'Work visas allow you to live and work temporarily in New Zealand, with some options offering pathways to residence.',
       sections: [
         {
-          title: 'Partner Visas',
-          content: 'Partner visas allow married spouses, de facto partners, and fiancé(e)s to live together permanently. These applications require extensive documentation to prove the genuineness and ongoing nature of your relationship.\n\nKey requirements include:\n• Genuine and continuing relationship\n• Sponsor eligibility and commitment\n• Health and character requirements\n• Financial support assurance\n• Relationship evidence documentation',
+          title: 'Skilled & Accredited Employer Visas',
+          content: 'Includes:\n• Accredited Employer Work Visa (AEWV)\n• Post-Study Work Visa\n• Specific Purpose Work Visa\n• Partnership-based Work Visas',
           subsections: [
             {
-              subtitle: 'Relationship Evidence',
-              details: 'We help you compile comprehensive evidence demonstrating the genuine nature of your relationship across financial, social, household, and commitment aspects.'
+              subtitle: 'AEWV and Sponsored Roles',
+              details: 'Employer must be accredited; we assist with job-matching and documentation.'
             },
             {
-              subtitle: 'Application Strategy',
-              details: 'Partner visa applications often involve temporary and permanent stages. We develop strategies to strengthen your case throughout the process.'
+              subtitle: 'Graduate Pathways',
+              details: 'For international students completing eligible studies in NZ.'
             }
           ]
         },
         {
-          title: 'Parent Visas',
-          content: 'Parent visas enable adult children to bring their parents to live permanently in their new country. These visas often have long processing times but provide pathways for family reunification.\n\nOptions typically include:\n• Contributory parent visas (faster processing)\n• Non-contributory parent visas (longer processing)\n• Temporary parent visas\n• Aged parent categories\n• Balance of family test requirements',
+          title: 'Short-Term & Seasonal Work',
+          content: 'Work in agriculture, hospitality, construction, and more.',
           subsections: [
             {
-              subtitle: 'Balance of Family Test',
-              details: 'Most parent visas require meeting the balance of family test, demonstrating that more children live in the destination country than elsewhere.'
+              subtitle: 'RSE & Sector-Specific Visas',
+              details: 'Temporary visas for seasonal workers in farming, fishing, and dairy industries.'
             },
             {
-              subtitle: 'Financial Planning',
-              details: 'Parent visas often require significant financial commitments. We help you understand and plan for these requirements.'
-            }
-          ]
-        },
-        {
-          title: 'Child and Other Family Visas',
-          content: 'Various visa categories exist for dependent children, adopted children, and other family members in specific circumstances.\n\nChild visa categories include:\n• Dependent child visas\n• Adoption visas\n• Relative orphan visas\n• Remaining relative visas\n• Carer visas for family members needing care',
-          subsections: [
-            {
-              subtitle: 'Dependent Children',
-              details: 'Children can often be included in primary visa applications or apply separately under child visa categories.'
-            },
-            {
-              subtitle: 'Special Circumstances',
-              details: 'We handle complex family situations including adoption, guardianship, and exceptional circumstances requiring family reunification.'
+              subtitle: 'Working Holiday Visa',
+              details: 'For youth from eligible countries to work and travel.'
             }
           ]
         }
       ],
-      conclusion: 'Family migration cases require sensitivity, attention to detail, and thorough understanding of complex regulations. Our experienced team provides compassionate support throughout your family reunification journey.',
+      conclusion: 'Whether you’re entering the job market or have a job offer, we simplify your path to working in New Zealand legally.',
       checklist: [
-        'Relationship/family evidence compiled',
-        'Sponsor eligibility confirmed',
-        'Health examinations completed',
-        'Police clearances obtained',
-        'Financial support demonstrated',
-        'Application forms completed',
-        'Supporting documents certified',
-        'Application lodged and tracked'
+        'Job offer secured (if required)',
+        'Qualifications and experience evaluated',
+        'Employer accreditation confirmed',
+        'Health and character checks passed',
+        'Visa application submitted'
       ]
     },
     processSteps: [
-      'Eligibility assessment and consultation',
-      'Evidence compilation and document preparation',
-      'Sponsor application (if required)',
-      'Main visa application lodged',
-      'Additional information requests responded to',
-      'Interview attendance (if required)',
-      'Visa decision and next steps'
+      'Initial visa consultation',
+      'Job or role validation',
+      'Document preparation',
+      'Visa submission and follow-up',
+      'Arrival and work commencement'
     ],
-    countries: ['Australia', 'Canada', 'New Zealand', 'United Kingdom'],
-    processingTime: '12-36 months (varies by category)',
+    countries: ['New Zealand'],
+    processingTime: '4–10 weeks',
+    author: 'Liam Employment Consultant'
+  },
+  {
+    slug: 'family-dependent-visas',
+    title: 'Family & Dependent Visas (Temporary)',
+    description: 'Join your partner or parent temporarily in New Zealand.',
+    excerpt: 'Let your loved ones join you during your studies or work in New Zealand. We support applications for partners and children on temporary visas.',
+    image: '/images/family-visa.jpg',
+    imageAlt: 'Family at the airport',
+    icon: '👨‍👩‍👧',
+    features: [
+      'Partner of Student/Worker',
+      'Child of Student/Worker',
+      'Dependent Child Visas'
+    ],
+    metaDescription: 'Join your loved ones in New Zealand with temporary partner and dependent child visas.',
+    content: {
+      introduction: 'If you’re working or studying in New Zealand, your partner and children may be eligible to join you temporarily.',
+      sections: [
+        {
+          title: 'Partner Visas',
+          content: 'Partners of work or student visa holders can apply for a visitor or work visa based on the relationship.',
+          subsections: [
+            {
+              subtitle: 'Relationship Proof',
+              details: 'We assist in proving genuine and stable relationships.'
+            },
+            {
+              subtitle: 'Visa Options',
+              details: 'Visitor or open work visas depending on primary applicant’s visa type.'
+            }
+          ]
+        },
+        {
+          title: 'Children of Migrants',
+          content: 'Children can join parents as visitors or students.',
+          subsections: [
+            {
+              subtitle: 'Dependent Visas',
+              details: 'Eligibility depends on age, relationship, and parent visa type.'
+            },
+            {
+              subtitle: 'Student Visa for Children',
+              details: 'Children may need a student visa for schooling.'
+            }
+          ]
+        }
+      ],
+      conclusion: 'Family should stay together. We simplify the steps to bring your loved ones with you to New Zealand.',
+      checklist: [
+        'Primary visa approved',
+        'Relationship or dependency proof gathered',
+        'Health and character documents submitted',
+        'Visa application lodged'
+      ]
+    },
+    processSteps: [
+      'Assessment of eligibility',
+      'Relationship/family documentation',
+      'Form preparation',
+      'Visa application submission',
+      'Follow-up and decision'
+    ],
+    countries: ['New Zealand'],
+    processingTime: '4–8 weeks',
     author: 'Emma Family Migration Specialist'
+  },
+  {
+    slug: 'special-visas',
+    title: 'Other Temporary Visas',
+    description: 'Special-purpose visas for humanitarian, cultural, or job-specific reasons.',
+    excerpt: 'From Antarctic travelers to religious workers, we handle special cases requiring temporary stay in New Zealand.',
+    image: '/images/special-visas.jpg',
+    imageAlt: 'Special crew members and humanitarian arrivals',
+    icon: '🛂',
+    features: [
+      'Refugee/Protection Visas',
+      'Religious & Cultural Exchange',
+      'Antarctic, Military, & Media'
+    ],
+    metaDescription: 'Handle unique temporary visa categories with expert guidance—from cultural exchange to refugee status and occupational registration.',
+    content: {
+      introduction: 'Some visa applicants don’t fit into standard categories. We support individuals applying under special humanitarian, cultural, or job-based programs.',
+      sections: [
+        {
+          title: 'Humanitarian & Government-Linked Visas',
+          content: 'Visas include:\n• Refugee or Protection Claimant Visas\n• Military Visas and Dependents\n• Dismissed Worker Visitor Visa',
+          subsections: [
+            {
+              subtitle: 'Protection and Humanitarian',
+              details: 'We help prepare refugee claims and interim support applications.'
+            },
+            {
+              subtitle: 'Government/Military Programs',
+              details: 'Visas for defense personnel or government-assigned individuals.'
+            }
+          ]
+        },
+        {
+          title: 'Cultural, Religious & Event Visas',
+          content: 'Short-term roles or travel for specific purposes.',
+          subsections: [
+            {
+              subtitle: 'Occupational Registration & Entertainment',
+              details: 'Visas for those entering New Zealand for credentialing, filming, or performing.'
+            },
+            {
+              subtitle: 'Religious or Cultural Exchange',
+              details: 'Visas for religious work, spiritual missions, or intercultural exchange.'
+            }
+          ]
+        }
+      ],
+      conclusion: 'If your purpose of travel is unique or tied to a special role, we can help determine your eligibility and support your application end-to-end.',
+      checklist: [
+        'Visa category identified',
+        'Sponsorship letters or documentation gathered',
+        'Medical and police clearances obtained',
+        'Application lodged with support'
+      ]
+    },
+    processSteps: [
+      'Initial screening and category matching',
+      'Documentation and sponsorship collection',
+      'Application preparation and legal review',
+      'Submission and monitoring',
+      'Outcome support and next steps'
+    ],
+    countries: ['New Zealand'],
+    processingTime: 'Varies widely by category',
+    author: 'Nora Special Case Consultant'
   }
 ];
 

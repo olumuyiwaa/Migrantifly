@@ -1,6 +1,7 @@
 
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import PaymentOptions from '../components/PaymentOptions'
 import WhyChoose from '../components/WhyChoose'
 import MigrationProcess from '../components/MigrationProcess'
 import Services from '../components/Services'
@@ -16,13 +17,14 @@ export default function Home() {
     <main>
       <Header />
       <Hero />
-      <WhyChoose />
+      <Stats />
       <MigrationProcess />
+      <WhyChoose />
       <Services />
       <Testimonials />
+      <PaymentOptions />
       <CallToAction />
       <CountryOptions />
-      <Stats />
       <BlogSection />
       <Footer />
     </main>

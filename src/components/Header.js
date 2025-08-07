@@ -55,7 +55,7 @@ export default function Header() {
               onClick={() => setShowModal(true)}
               className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
               >
-              Book Now
+              Book a Consultation
             </button>
             {/* <div className="relative">
               <button
@@ -74,12 +74,12 @@ export default function Header() {
                 </div>
               )}
             </div> */}
-            {/* <Link
-              href="/signup"
+            <Link
+              href="/portal"
               className="text-primary-600 hover:text-primary-700 font-medium"
             >
-              Sign Up
-            </Link> */}
+              Sign In
+            </Link>
 
           </div>
 
@@ -124,14 +124,14 @@ export default function Header() {
               onClick={() => setShowModal(true)}
               className="block px-3 py-2 bg-primary-600 text-white rounded-lg font-medium"
               >
-              Book Now
+              Book a Consultation
             </button>
-              {/* <Link
-                href="/signup"
+              <Link
+                href="/portal"
                 className="block px-3 py-2 text-primary-600 font-medium"
               >
-                Sign Up
-              </Link> */}
+                Sign In
+              </Link>
             </div>
           </div>
         )}

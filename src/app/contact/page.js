@@ -86,7 +86,7 @@ export default function Contact() {
                     type="button"
                     className="flex-1 border border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white py-3 rounded-lg font-semibold transition-colors"
                   >
-                    Book a Call
+                    Book a Consultation
                   </button>
                 </div>
               </form>

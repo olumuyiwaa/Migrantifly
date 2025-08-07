@@ -150,9 +150,8 @@ export default function PrivacyPolicy() {
               <div className="space-y-3 text-gray-600">
                 <p>If you have questions about this Privacy Policy or your personal information, please contact us:</p>
                 <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <p><strong>Email:</strong> privacy@migrantifly.com</p>
-                  <p><strong>Phone:</strong> [Your Phone Number]</p>
-                  <p><strong>Address:</strong> [Your Business Address]</p>
+                  <p><strong>Email:</strong> Migrantifly@gmail.com</p>
+                <p><strong>Address:</strong> 16 Nandi Lane, Ranui, Auckland, New Zealand</p>
                 </div>
               </div>
             </section>

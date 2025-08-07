@@ -7,45 +7,81 @@ import Link from 'next/link';
 export default function Services() {
   const services = [
     {
-      slug: 'skilled-migration-visas',
-      title: "Skilled Migration Visas",
-      description: "Move abroad based on your skills, qualifications, and work experience.",
-      icon: "🏢",
+      slug: 'visitor-visas',
+      title: "Visitor Visas",
+      description: "Short-term stay for tourism, family visits, medical reasons, or cultural events.",
+      icon: "🌍",
       features: [
-        "General Skilled Migration",
-        "Employer Sponsored Visas",
-        "Regional Opportunities"
+        "General Visitor Visa",
+        "Partner of a New Zealander Visitor Visa",
+        "Parent & Grandparent Visitor Visa",
+        "Medical Treatment Visa",
+        "Culturally Arranged Marriage Visa",
+        "Business & Event Visitor Visas"
       ],
-      processingTime: "6-12 months",
-      countries: ["Australia", "Canada", "New Zealand", "UK"]
+      processingTime: "2–8 weeks",
+      countries: ["New Zealand", "Fiji", "Australia"]
     },
     {
       slug: 'student-visas',
       title: "Student Visas",
-      description: "Study abroad with support on visa applications and education pathways.",
+      description: "Study abroad full-time or part-time with post-study options.",
       icon: "🎓",
       features: [
-        "University Admissions",
-        "Visa Application Assistance",
-        "Post-Study Work Options"
+        "Fee-Paying Student Visa",
+        "Pathway Student Visa",
+        "Exchange Student Visa",
+        "Dependent Child Student Visa",
+        "Foreign Government Sponsored Student Visa"
       ],
-      processingTime: "4-8 weeks",
-      countries: ["Australia", "Canada", "UK", "US", "New Zealand"]
+      processingTime: "4–12 weeks",
+      countries: ["New Zealand", "Fiji", "Australia"]
     },
     {
-      slug: 'family-partner-visas',
-      title: "Family & Partner Visas",
-      description: "Reunite with your loved ones and build a future together.",
-      icon: "❤️",
+      slug: 'work-visas',
+      title: "Work Visas",
+      description: "Work abroad with opportunities from skilled employment to holiday jobs.",
+      icon: "💼",
       features: [
-        "Partner Visas",
-        "Parent Visas",
-        "Child Visas"
+        "Accredited Employer Work Visa (AEWV)",
+        "Working Holiday Visas",
+        "Post-Study Work Visa",
+        "Partner-Based Work Visas",
+        "Sector-Specific Work Visas (RSE, Fishing, Meat, Construction)"
       ],
-      processingTime: "12-36 months",
-      countries: ["Australia", "Canada", "New Zealand", "UK"]
+      processingTime: "6–20 weeks",
+      countries: ["New Zealand", "Fiji", "Australia"]
+    },
+    {
+      slug: 'family-dependent-visas',
+      title: "Family & Dependent Visas",
+      description: "Bring your partner or children to live with you temporarily.",
+      icon: "👨‍👩‍👧‍👦",
+      features: [
+        "Partner of Worker/Student Visas",
+        "Child of Worker/Student Visas",
+        "Dependent Child Student Visa"
+      ],
+      processingTime: "3–12 months",
+      countries: ["New Zealand", "Fiji", "Australia"]
+    },
+    {
+      slug: 'special-visas',
+      title: "Other Temporary Visas",
+      description: "Special categories including refugee, military, crew, and cultural exchange.",
+      icon: "✨",
+      features: [
+        "Refugee or Protection Claimant Visa",
+        "Military & Crew Visas",
+        "Religious/Cultural Exchange Visa",
+        "Antarctic Traveller Visa",
+        "Entertainment Industry Visa"
+      ],
+      processingTime: "Varies by category",
+      countries: ["New Zealand"]
     }
   ];
+
 
   const visaTypes = [
     {
@@ -68,14 +104,6 @@ export default function Services() {
     }
   ];
 
-  const countries = [
-    { name: "Australia", flag: "🇦🇺", visas: 12 },
-    { name: "Canada", flag: "🇨🇦", visas: 15 },
-    { name: "New Zealand", flag: "🇳🇿", visas: 8 },
-    { name: "United Kingdom", flag: "🇬🇧", visas: 10 },
-    { name: "United States", flag: "🇺🇸", visas: 6 }
-  ];
-
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -84,7 +112,6 @@ export default function Services() {
     visaType: ''
   });
 
-  const [showCountries, setShowCountries] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -201,36 +228,6 @@ export default function Services() {
               </div>
             ))}
           </div>
-
-          {/* Country Explorer */}
-          <div className="text-center mb-8">
-            <button
-              onClick={() => setShowCountries(!showCountries)}
-              className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-colors duration-300"
-            >
-              <span>Explore by Country</span>
-              <svg className={`ml-2 w-5 h-5 transform transition-transform duration-300 ${showCountries ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-          </div>
-
-          {showCountries && (
-            <div className="grid md:grid-cols-5 gap-6 mb-16 animate-fadeIn">
-              {countries.map((country, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 text-center group hover:-translate-y-1">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {country.flag}
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">{country.name}</h3>
-                  <p className="text-sm text-gray-600">{country.visas} visa types</p>
-                  <button className="mt-3 text-blue-600 hover:text-blue-700 text-sm font-medium">
-                    View Options →
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 
@@ -327,12 +324,6 @@ export default function Services() {
 
                 <div className="flex flex-col sm:flex-row gap-4 pt-6">
                   <button
-                    type="submit"
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                  >
-                    Get Free Assessment
-                  </button>
-                  <button
                     type="button"
                     className="flex-1 border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105"
                   >
@@ -342,7 +333,7 @@ export default function Services() {
               </form>
             </div>
 
-            {/* Enhanced Image Section */}
+            {/* Enhanced Section */}
             <div className="lg:col-span-1">
               <div className="relative h-[500px] flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"></div>

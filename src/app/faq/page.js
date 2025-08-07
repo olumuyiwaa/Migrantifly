@@ -152,7 +152,7 @@ export default function FAQ() {
                 href="/services"
                 className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg font-semibold text-center transition-colors"
               >
-                Check Eligibility
+                Check Services
               </Link>
           </div>
         </div>
