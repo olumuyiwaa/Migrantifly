@@ -1,9 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Add path mapping for @ alias
-  experimental: {
-    // Enable if needed for newer Next.js features
+  reactStrictMode: true,
+  images: {
+    domains: ['res.cloudinary.com'],
   },
-  // Disable font optimization if having network issues
-  optimizeFonts: false,
-}
+  async rewrites() {
+    return [
+      {
+        source: '/portal',
+        destination: '/portal/index.html',
+      },
+      {
+        source: '/portal/:path*',
+        destination: '/portal/index.html',
+      },
+    ];
+  },
+};
+
+export default nextConfig;
