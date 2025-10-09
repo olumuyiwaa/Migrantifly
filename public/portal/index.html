@@ -18,6 +18,8 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <!-- Enable proper mobile scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
@@ -43,17 +45,16 @@
             src="/loading-animation.json"
             background="transparent"
             speed="1"
-            style="width: 320px; height: 320px;"
+            style="width: clamp(220px, 70vw, 420px); height: clamp(220px, 70vw, 420px);"
             loop
             autoplay>
     </dotlottie-player>
 
-    <p style="margin-top: 20px; color: #333; font-family: 'Poppins', sans-serif; max-width: 300px;">
+    <p style="margin-top: 20px; color: #333; font-family: 'Poppins', sans-serif; max-width: min(90vw, 480px); font-size: clamp(16px, 4vw, 18px); line-height: 1.45; padding: 0 8px;">
       Welcome to <strong>Migrantifly Portal</strong>, kindly wait a few seconds while we get things ready.
     </p>
   </div>
 </div>
-
 
 <!-- Flutter app will replace this -->
 <script>
