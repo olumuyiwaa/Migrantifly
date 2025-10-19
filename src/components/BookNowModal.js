@@ -152,22 +152,44 @@ export default function BookNowModal({ show, onClose }) {
     }
   };
 
-  const handlePayment = () => {
-    // Redirect to payment gateway
-    const paymentData = {
-      consultationId: consultationData.consultationId,
-      paymentId: consultationData.paymentId,
-      amount: CONSULTATION_FEE,
-    };
+  const handlePayment = async () => {
+    setLoading(true);
+    try {
+      // Redirect to payment gateway with consultation data
+      const paymentParams = new URLSearchParams({
+        paymentId: consultationData.paymentId,
+        consultationId: consultationData.consultationId,
+        amount: CONSULTATION_FEE,
+        email: formData.clientEmail,
+        date: formData.preferredDate,
+      });
 
-    // In a real scenario, integrate with Stripe or your payment provider
-    console.log("Proceeding to payment:", paymentData);
+      window.location.href = `/payment?${paymentParams.toString()}`;
+    } catch (err) {
+      setError("Failed to redirect to payment. Please try again.");
+      setLoading(false);
+    }
+  };
 
-    setSuccess("Redirecting to payment...");
-    setTimeout(() => {
-      // Navigate to payment page
-      window.location.href = `/payment?paymentId=${paymentData.paymentId}&consultationId=${paymentData.consultationId}`;
-    }, 1000);
+  const confirmBookingAfterPayment = async (consultationId, email) => {
+    try {
+      const res = await fetch(`${API_BASE}/consultation/${consultationId}/confirm-booking`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to confirm booking");
+      }
+
+      return data.data;
+    } catch (err) {
+      console.error("Error confirming booking:", err);
+      throw err;
+    }
   };
 
   const resetModal = () => {
@@ -487,6 +509,7 @@ export default function BookNowModal({ show, onClose }) {
                   Back
                 </button>
             )}
+
             {step < 4 && (
                 <button
                     onClick={handleNextStep}
