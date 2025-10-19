@@ -487,7 +487,6 @@ export default function BookNowModal({ show, onClose }) {
                   Back
                 </button>
             )}
-
             {step < 4 && (
                 <button
                     onClick={handleNextStep}
