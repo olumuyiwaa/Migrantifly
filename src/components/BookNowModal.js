@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { AlertCircle, Clock, CheckCircle, Loader } from "lucide-react";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe("pk_test_51SKZtKD3g7MoYNaI33fLyF5m4heLMOFHfNgFaIUtNR8vvc0vDn2oijlblz1v5b4QpkCTX97nYOV26cFLWa7cpcsR004RA7L2WA");
 
 export default function BookNowModal({ show, onClose }) {
   if (!show) return null;
@@ -152,10 +155,17 @@ export default function BookNowModal({ show, onClose }) {
     }
   };
 
+
   const handlePayment = async () => {
     setLoading(true);
+    setError("");
+
     try {
-      // Call backend to create Stripe payment intent
+      if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
+        throw new Error("Stripe publishable key is not configured.");
+      }
+
+      // Create Checkout Session on your backend
       const res = await fetch(`${API_BASE}/payments/create-consultation-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -173,8 +183,12 @@ export default function BookNowModal({ show, onClose }) {
         throw new Error(data.message || "Failed to initialize payment");
       }
 
-      // Initialize Stripe and show payment modal
-      const stripe = window.Stripe("pk_test_51SKZtKD3g7MoYNaI33fLyF5m4heLMOFHfNgFaIUtNR8vvc0vDn2oijlblz1v5b4QpkCTX97nYOV26cFLWa7cpcsR004RA7L2WA"); // to later be Set this in env
+      // Initialize Stripe via @stripe/stripe-js
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error("Stripe failed to initialize. Please try again.");
+      }
+
       const { error } = await stripe.redirectToCheckout({
         sessionId: data.data.sessionId,
       });
@@ -187,6 +201,7 @@ export default function BookNowModal({ show, onClose }) {
       setLoading(false);
     }
   };
+
 
   const confirmBookingAfterPayment = async (consultationId, email) => {
     try {
