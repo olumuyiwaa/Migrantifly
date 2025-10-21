@@ -17,7 +17,10 @@ export default function ConsultationSuccessPage() {
     const [error, setError] = useState('');
     const [receipt, setReceipt] = useState(null); // { email, amount, currency, sessionId, consultationId }
 
-    const hasParams = useMemo(() => !!sessionId && !!consultationId, [sessionId, consultationId]);
+    const hasParams = useMemo(
+        () => Boolean(sessionId && consultationId),
+        [sessionId, consultationId]
+    );
 
     useEffect(() => {
         if (!hasParams) {
@@ -28,67 +31,72 @@ export default function ConsultationSuccessPage() {
 
         let cancelled = false;
 
-        async function verifyAndConfirm() {
-            try {
-                // 1) Verify the Checkout Session with your backend
-                // Expecting a response like:
-                // { data: { paid: true, email: '...', amount: 5000, currency: 'usd' } }
-                const verifyRes = await fetch(`${API_BASE}/payments/verify-checkout-session`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ sessionId }),
-                    cache: 'no-store',
-                });
-                const verifyJson = await verifyRes.json();
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-                if (!verifyRes.ok) {
-                    throw new Error(verifyJson?.message || 'Failed to verify payment.');
-                }
+        async function verifyWithRetries() {
+            const maxAttempts = 6;       // ~5 seconds total
+            const delayMs = 800;
 
-                const paid = verifyJson?.data?.paid ?? false;
-                const email = verifyJson?.data?.email || '';
-                const amount = verifyJson?.data?.amount ?? null; // in smallest currency unit
-                const currency = verifyJson?.data?.currency || '';
-
-                if (!paid) {
-                    throw new Error('Payment is not completed. If you were charged, please contact support.');
-                }
-
-                // 2) Confirm the booking
-                // Adjust body fields to match your backend (e.g., { email } or { sessionId }).
-                const confirmRes = await fetch(
-                    `${API_BASE}/consultation/${encodeURIComponent(consultationId)}/confirm-booking`,
-                    {
-                        method: 'PATCH',
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                    const res = await fetch(`${API_BASE}/payments/verify-checkout-session`, {
+                        method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email }), // or { sessionId } depending on your API
-                    }
-                );
-                const confirmJson = await confirmRes.json();
-
-                if (!confirmRes.ok) {
-                    throw new Error(confirmJson?.message || 'Failed to confirm booking.');
-                }
-
-                if (!cancelled) {
-                    setReceipt({
-                        email,
-                        amount,
-                        currency,
-                        sessionId,
-                        consultationId,
+                        body: JSON.stringify({ sessionId }),
+                        cache: 'no-store',
                     });
-                    setStatus('success');
-                }
-            } catch (e) {
-                if (!cancelled) {
-                    setError(e?.message || 'Something went wrong finalizing your booking.');
-                    setStatus('error');
+
+                    const json = await res.json();
+                    if (!res.ok) {
+                        throw new Error(json?.message || 'Failed to verify payment.');
+                    }
+
+                    const data = json?.data || {};
+                    const paid = Boolean(data.paid);
+                    const email = data.email || '';
+                    const amount = data.amount ?? null;       // smallest unit
+                    const currency = data.currency || 'usd';
+                    const metaConsultationId = data.consultationId || null;
+
+                    // Validate that session metadata matches the URL to avoid mismatches
+                    if (metaConsultationId && metaConsultationId !== consultationId) {
+                        throw new Error('Consultation mismatch. Please contact support with your receipt.');
+                    }
+
+                    if (!paid) {
+                        // Not yet marked paid; allow webhook time to complete
+                        if (attempt < maxAttempts) {
+                            await sleep(delayMs);
+                            continue;
+                        }
+                        throw new Error('Payment not completed yet. If you were charged, please contact support.');
+                    }
+
+                    if (!cancelled) {
+                        setReceipt({
+                            email,
+                            amount,
+                            currency,
+                            sessionId,
+                            consultationId,
+                        });
+                        setStatus('success');
+                    }
+                    return;
+                } catch (e) {
+                    if (attempt < maxAttempts) {
+                        await sleep(delayMs);
+                        continue;
+                    }
+                    if (!cancelled) {
+                        setError(e?.message || 'Something went wrong verifying your payment.');
+                        setStatus('error');
+                    }
                 }
             }
         }
 
-        verifyAndConfirm();
+        verifyWithRetries();
 
         return () => {
             cancelled = true;
@@ -98,13 +106,13 @@ export default function ConsultationSuccessPage() {
     const formatAmount = (amount, currency) => {
         if (amount == null) return null;
         try {
-            // Stripe amounts are typically in the smallest unit
-            const decimals = ['jpy', 'krw'].includes(String(currency).toLowerCase()) ? 0 : 2;
-            const value = amount / Math.pow(10, decimals);
-            return new Intl.NumberFormat(undefined, {
-                style: 'currency',
-                currency: currency || 'USD',
-            }).format(value);
+            const code = String(currency || 'USD').toUpperCase();
+            const zeroDecimal = [
+                'BIF','CLP','DJF','GNF','JPY','KMF','KRW','MGA','PYG','RWF','UGX','VND','VUV','XAF','XOF','XPF'
+            ];
+            const isZero = zeroDecimal.includes(code);
+            const value = isZero ? amount : amount / 100;
+            return new Intl.NumberFormat(undefined, { style: 'currency', currency: code }).format(value);
         } catch {
             return amount;
         }
@@ -130,7 +138,8 @@ export default function ConsultationSuccessPage() {
                         </div>
                         <h1 className="text-2xl font-bold text-slate-900">Booking confirmed!</h1>
                         <p className="mt-2 text-slate-600">
-                            Thank you. A confirmation email has been sent{receipt?.email ? ` to ${receipt.email}` : ''}.
+                            Thank you. A confirmation email will arrive shortly
+                            {receipt?.email ? ` at ${receipt.email}` : ''}.
                         </p>
 
                         <div className="mt-6 rounded-lg bg-slate-50 border border-slate-200 text-left p-4">
@@ -144,7 +153,7 @@ export default function ConsultationSuccessPage() {
                                 <div className="flex justify-between">
                                     <dt className="text-slate-500">Session</dt>
                                     <dd className="font-mono text-slate-800">
-                                        {receipt?.sessionId?.slice(0, 12)}…
+                                        {receipt?.sessionId?.slice(0, 14)}…
                                     </dd>
                                 </div>
                                 {receipt?.amount != null && (
