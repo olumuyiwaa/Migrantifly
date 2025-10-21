@@ -156,7 +156,7 @@ export default function BookNowModal({ show, onClose }) {
     setLoading(true);
     try {
       // Call backend to create Stripe payment intent
-      const res = await fetch(`${API_BASE}/payment/create-consultation-payment`, {
+      const res = await fetch(`${API_BASE}/payments/create-consultation-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
