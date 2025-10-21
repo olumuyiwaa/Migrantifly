@@ -161,10 +161,6 @@ export default function BookNowModal({ show, onClose }) {
     setError("");
 
     try {
-      if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
-        throw new Error("Stripe publishable key is not configured.");
-      }
-
       // Create Checkout Session on your backend
       const res = await fetch(`${API_BASE}/payments/create-consultation-payment`, {
         method: "POST",
