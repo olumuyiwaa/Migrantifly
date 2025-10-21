@@ -155,18 +155,35 @@ export default function BookNowModal({ show, onClose }) {
   const handlePayment = async () => {
     setLoading(true);
     try {
-      // Redirect to payment gateway with consultation data
-      const paymentParams = new URLSearchParams({
-        paymentId: consultationData.paymentId,
-        consultationId: consultationData.consultationId,
-        amount: CONSULTATION_FEE,
-        email: formData.clientEmail,
-        date: formData.preferredDate,
+      // Call backend to create Stripe payment intent
+      const res = await fetch(`${API_BASE}/payment/create-consultation-payment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          consultationId: consultationData.consultationId,
+          paymentId: consultationData.paymentId,
+          amount: CONSULTATION_FEE,
+          email: formData.clientEmail,
+        }),
       });
 
-      window.location.href = `/payment?${paymentParams.toString()}`;
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to initialize payment");
+      }
+
+      // Initialize Stripe and show payment modal
+      const stripe = window.Stripe("pk_test_51SKZtKD3g7MoYNaI33fLyF5m4heLMOFHfNgFaIUtNR8vvc0vDn2oijlblz1v5b4QpkCTX97nYOV26cFLWa7cpcsR004RA7L2WA"); // to later be Set this in env
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: data.data.sessionId,
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
     } catch (err) {
-      setError("Failed to redirect to payment. Please try again.");
+      setError(err.message || "Payment initialization failed");
       setLoading(false);
     }
   };
@@ -210,10 +227,11 @@ export default function BookNowModal({ show, onClose }) {
   };
 
   const formatDate = (dateStr) => {
-    return new Date(`${dateStr}T00:00:00`).toLocaleDateString("en-US", {
+    return new Date(`${dateStr}T00:00:00Z`).toLocaleDateString("en-US", {
       weekday: "long",
       month: "long",
       day: "numeric",
+      timeZone: "UTC"
     });
   };
 
