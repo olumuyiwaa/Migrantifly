@@ -185,13 +185,26 @@ export default function BookNowModal({ show, onClose }) {
         throw new Error("Stripe failed to initialize. Please try again.");
       }
 
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: data.data.sessionId,
-      });
+      // const { error } = await stripe.redirectToCheckout({
+      //   sessionId: data.data.sessionId,
+      // });
+      //
+      // if (error) {
+      //   throw new Error(error.message);
+      // }
 
-      if (error) {
-        throw new Error(error.message);
+
+      // Expect your backend to return the URL of the Checkout Session
+      const checkoutUrl =
+          data?.data?.checkoutUrl || data?.data?.url || data?.data?.sessionUrl;
+
+      if (!checkoutUrl) {
+        throw new Error("Checkout URL was not returned by the server.");
       }
+
+      // Redirect the browser to Stripe Checkout
+      window.location.assign(checkoutUrl);
+
     } catch (err) {
       setError(err.message || "Payment initialization failed");
       setLoading(false);
