@@ -22,27 +22,6 @@ export default function ConsultationSuccessPage() {
         [sessionId, consultationId]
     );
 
-    const confirmBookingAfterPayment = async (consultationId, email) => {
-        try {
-            const res = await fetch(`${API_BASE}/consultation/${consultationId}/confirm-booking`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.message || "Failed to confirm booking");
-            }
-
-            return data.data;
-        } catch (err) {
-            console.error("Error confirming booking:", err);
-            throw err;
-        }
-    };
-
     useEffect(() => {
         if (!hasParams) {
             setStatus('error');
@@ -53,24 +32,6 @@ export default function ConsultationSuccessPage() {
         let cancelled = false;
 
         const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-        async function confirmWithRetries(id, email) {
-            const maxConfirmAttempts = 3;
-            const delayMs = 800;
-
-            for (let attempt = 1; attempt <= maxConfirmAttempts; attempt++) {
-                try {
-                    await confirmBookingAfterPayment(id, email);
-                    return;
-                } catch (e) {
-                    if (attempt < maxConfirmAttempts) {
-                        await sleep(delayMs);
-                        continue;
-                    }
-                    throw e;
-                }
-            }
-        }
 
         async function verifyWithRetries() {
             const maxAttempts = 6;       // ~5 seconds total
@@ -111,20 +72,6 @@ export default function ConsultationSuccessPage() {
                         throw new Error('Payment not completed yet. If you were charged, please contact support.');
                     }
 
-                    // Payment verified — now confirm the booking on the backend
-                    try {
-                        await confirmWithRetries(consultationId, email);
-                    } catch (confirmErr) {
-                        if (!cancelled) {
-                            setError(
-                                'Your payment was verified, but we could not finalize the booking. ' +
-                                'Please contact support with your session ID.'
-                            );
-                            setStatus('error');
-                        }
-                        return;
-                    }
-
                     if (!cancelled) {
                         setReceipt({
                             email,
@@ -134,6 +81,7 @@ export default function ConsultationSuccessPage() {
                             consultationId,
                         });
                         setStatus('success');
+                        await confirmBookingAfterPayment(id, email);
                     }
                     return;
                 } catch (e) {
@@ -155,7 +103,26 @@ export default function ConsultationSuccessPage() {
             cancelled = true;
         };
     }, [hasParams, sessionId, consultationId]);
+    const confirmBookingAfterPayment = async (consultationId, email) => {
+        try {
+            const res = await fetch(`${API_BASE}/consultation/${consultationId}/confirm-booking`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
 
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.message || "Failed to confirm booking");
+            }
+
+            return data.data;
+        } catch (err) {
+            console.error("Error confirming booking:", err);
+            throw err;
+        }
+    };
     const formatAmount = (amount, currency) => {
         if (amount == null) return null;
         try {
