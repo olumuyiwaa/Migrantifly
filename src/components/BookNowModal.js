@@ -211,28 +211,6 @@ export default function BookNowModal({ show, onClose }) {
     }
   };
 
-
-  const confirmBookingAfterPayment = async (consultationId, email) => {
-    try {
-      const res = await fetch(`${API_BASE}/consultation/${consultationId}/confirm-booking`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to confirm booking");
-      }
-
-      return data.data;
-    } catch (err) {
-      console.error("Error confirming booking:", err);
-      throw err;
-    }
-  };
-
   const resetModal = () => {
     setStep(1);
     setFormData({
