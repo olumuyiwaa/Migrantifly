@@ -81,7 +81,7 @@ export default function ConsultationSuccessPage() {
                             consultationId,
                         });
                         setStatus('success');
-                        await confirmBookingAfterPayment(id, email);
+                        await confirmBookingAfterPayment(consultationId, email);
                     }
                     return;
                 } catch (e) {
