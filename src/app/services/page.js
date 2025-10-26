@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
+import BookingFlow from '../../components/BookingFlow';
+
 
 export default function Services() {
   const services = [
@@ -112,6 +114,7 @@ export default function Services() {
     visaType: ''
   });
 
+  const [showBooking, setShowBooking] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -244,94 +247,18 @@ export default function Services() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12 items-center">
             {/* Enhanced Form */}
-            <div className="lg:col-span-2">
-              <div className="mb-8">
-                <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200">
-                  Let's Build Your Future Together
-                </h2>
-                <p className="text-blue-100 text-lg leading-relaxed">
-                  Start with a free assessment or talk to one of our migration specialists today.
-                  Our expert team is ready to guide you through every step of your migration journey.
-                </p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-300"
-                    required
-                  />
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-300"
-                    required
-                  />
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-300"
-                    required
-                  />
-                  <select
-                    name="visaType"
-                    value={formData.visaType}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 bg-white/90 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-300"
-                  >
-                    <option value="">Select Visa Type</option>
-                    {visaTypes.map((visa, idx) => (
-                      <option key={idx} value={visa.title}>{visa.title}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <textarea
-                  name="message"
-                  placeholder="Tell us about your migration goals and any specific questions you have..."
-                  rows="4"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-white/90 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none transition-all duration-300"
-                ></textarea>
-
-                <div className="space-y-3">
-                  <label className="block text-white font-medium">CV / Resume Upload (Optional)</label>
-                  <input
-                    type="file"
-                    multiple
-                    accept=".txt,.doc,.docx,.pdf,.jpg,.png"
-                    className="w-full text-sm text-blue-100 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:cursor-pointer transition-all duration-300"
-                  />
-                  <p className="text-xs text-blue-200">
-                    Accepted: txt, doc, docx, pdf, jpg, png. Max: 32 MB per file, 5 files total.
-                  </p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                  <button
-                    type="button"
-                    className="flex-1 border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105"
-                  >
-                    Book Consultation
-                  </button>
-                </div>
-              </form>
+            <div className="lg:col-span-2 mt-8">
+              <BookingFlow
+                  initialData={{
+                    clientName: formData.name,
+                    clientEmail: formData.email,
+                    clientPhone: formData.phone,
+                    message: formData.message,
+                  }}
+                  onClose={() => setShowBooking(false)}
+              />
             </div>
+
 
             {/* Enhanced Section */}
             <div className="lg:col-span-1">
