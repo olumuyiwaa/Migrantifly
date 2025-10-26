@@ -265,13 +265,14 @@ export default function Services() {
               <div className="relative h-[500px] flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"></div>
                 <div className="relative">
-                  <div className="w-120 h-120 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full border border-white/20 flex items-center justify-center mb-4">
+                  <div className="relative mx-auto aspect-square w-[300px] sm:w-[300px] md:w-[330px] lg:w-[360px] bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full border border-white/20 flex items-center justify-center mb-4 shadow-xl">
                     <img
-                      src="/images/about2.png"
-                      alt="Migration Consultant"
-                      className="w-100 h-100 object-cover rounded-full shadow-2xl"
+                        src="/images/about2.png"
+                        alt="Migration Consultant"
+                        className="w-[82%] h-[82%] sm:w-[84%] sm:h-[84%] md:w-[86%] md:h-[86%] object-cover rounded-full shadow-2xl"
                     />
                   </div>
+
                   <div className="text-center mt-6">
                     <h3 className="text-2xl font-bold text-white mb-2">Expert Guidance</h3>
                     <p className="text-blue-200">Professional migration consultants ready to help</p>
