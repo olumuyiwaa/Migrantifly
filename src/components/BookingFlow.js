@@ -223,7 +223,7 @@ export default function BookingFlow({ initialData = {}, onClose }) {
                 </div>
                 <button
                     onClick={resetFlow}
-                    className="text-gray-300 hover:text-white text-xl font-bold transition"
+                    className="text-gray-300 hover:text-white text-l font-bold transition"
                     aria-label="Close booking"
                 >
                     Reset

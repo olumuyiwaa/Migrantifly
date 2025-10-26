@@ -85,27 +85,6 @@ export default function Services() {
   ];
 
 
-  const visaTypes = [
-    {
-      title: "Skilled Independent Visa",
-      description: "Migrate based on your skills and qualifications",
-      icon: "⚡",
-      color: "from-green-600 to-green-700"
-    },
-    {
-      title: "Student Visa",
-      description: "Study at world-class institutions",
-      icon: "📚",
-      color: "from-purple-600 to-purple-700"
-    },
-    {
-      title: "Family Reunion Visa",
-      description: "Bring your family together",
-      icon: "❤️",
-      color: "from-pink-600 to-pink-700"
-    }
-  ];
-
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -113,22 +92,6 @@ export default function Services() {
     message: '',
     visaType: ''
   });
-
-  const [showBooking, setShowBooking] = useState(false);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission logic
-  };
 
   return (
     <main className="overflow-x-hidden">
