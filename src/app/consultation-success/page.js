@@ -12,14 +12,20 @@ export default function ConsultationSuccessPage() {
 
     const sessionId = searchParams.get('session_id') || '';
     const consultationId = searchParams.get('consultationId') || '';
+    const applicationId = searchParams.get('applicationId') || '';
 
     const [status, setStatus] = useState('verifying'); // verifying | success | error
     const [error, setError] = useState('');
-    const [receipt, setReceipt] = useState(null); // { email, amount, currency, sessionId, consultationId }
+    const [receipt, setReceipt] = useState(null); // { email, amount, currency, sessionId, consultationId?, applicationId?, invoiceUrl? }
+
+    const isApplicationDeposit = useMemo(
+        () => Boolean(applicationId) && !Boolean(consultationId),
+        [applicationId, consultationId]
+    );
 
     const hasParams = useMemo(
-        () => Boolean(sessionId && consultationId),
-        [sessionId, consultationId]
+        () => Boolean(sessionId && (consultationId || applicationId)),
+        [sessionId, consultationId, applicationId]
     );
 
     useEffect(() => {
@@ -56,11 +62,17 @@ export default function ConsultationSuccessPage() {
                     const email = data.email || '';
                     const amount = data.amount ?? null;       // smallest unit
                     const currency = data.currency || 'usd';
-                    const metaConsultationId = data.consultationId || null;
+                    const metaIdFromSession = data.consultationId || null; // backend may return consultationId OR applicationId here
+                    const invoiceUrl = data.invoiceUrl || null;
 
                     // Validate that session metadata matches the URL to avoid mismatches
-                    if (metaConsultationId && metaConsultationId !== consultationId) {
-                        throw new Error('Consultation mismatch. Please contact support with your receipt.');
+                    if (metaIdFromSession) {
+                        if (!isApplicationDeposit && consultationId && metaIdFromSession !== consultationId) {
+                            throw new Error('Consultation mismatch. Please contact support with your receipt.');
+                        }
+                        if (isApplicationDeposit && applicationId && metaIdFromSession !== applicationId) {
+                            throw new Error('Application mismatch. Please contact support with your receipt.');
+                        }
                     }
 
                     if (!paid) {
@@ -78,10 +90,16 @@ export default function ConsultationSuccessPage() {
                             amount,
                             currency,
                             sessionId,
-                            consultationId,
+                            consultationId: !isApplicationDeposit ? consultationId : null,
+                            applicationId: isApplicationDeposit ? applicationId : null,
+                            invoiceUrl,
                         });
                         setStatus('success');
-                        await confirmBookingAfterPayment(consultationId, email);
+
+                        // For consultation payments, confirm booking after payment.
+                        if (!isApplicationDeposit && consultationId && email) {
+                            await confirmBookingAfterPayment(consultationId, email);
+                        }
                     }
                     return;
                 } catch (e) {
@@ -102,7 +120,8 @@ export default function ConsultationSuccessPage() {
         return () => {
             cancelled = true;
         };
-    }, [hasParams, sessionId, consultationId]);
+    }, [hasParams, sessionId, consultationId, applicationId, isApplicationDeposit]);
+
     const confirmBookingAfterPayment = async (consultationId, email) => {
         try {
             const res = await fetch(`${API_BASE}/consultation/${consultationId}/confirm-booking`, {
@@ -123,6 +142,7 @@ export default function ConsultationSuccessPage() {
             throw err;
         }
     };
+
     const formatAmount = (amount, currency) => {
         if (amount == null) return null;
         try {
@@ -144,9 +164,9 @@ export default function ConsultationSuccessPage() {
                 {status === 'verifying' && (
                     <div className="text-center">
                         <div className="mx-auto mb-6 h-12 w-12 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin" />
-                        <h1 className="text-2xl font-semibold text-slate-800">Finalizing your booking…</h1>
+                        <h1 className="text-2xl font-semibold text-slate-800">Finalizing your payment…</h1>
                         <p className="mt-2 text-slate-500">
-                            We’re verifying your payment and confirming your consultation.
+                            We’re verifying your payment and updating your {isApplicationDeposit ? 'application' : 'consultation'}.
                         </p>
                     </div>
                 )}
@@ -156,7 +176,9 @@ export default function ConsultationSuccessPage() {
                         <div className="mx-auto mb-6 h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
                             <span className="text-green-700 text-2xl">✓</span>
                         </div>
-                        <h1 className="text-2xl font-bold text-slate-900">Booking confirmed!</h1>
+                        <h1 className="text-2xl font-bold text-slate-900">
+                            {receipt?.consultationId ? 'Booking confirmed!' : 'Payment successful!'}
+                        </h1>
                         <p className="mt-2 text-slate-600">
                             Thank you. A confirmation email will arrive shortly
                             {receipt?.email ? ` at ${receipt.email}` : ''}.
@@ -164,23 +186,52 @@ export default function ConsultationSuccessPage() {
 
                         <div className="mt-6 rounded-lg bg-slate-50 border border-slate-200 text-left p-4">
                             <dl className="grid grid-cols-1 gap-3">
-                                <div className="flex justify-between">
-                                    <dt className="text-slate-500">Consultation ID</dt>
-                                    <dd className="font-mono text-slate-800">
-                                        {receipt?.consultationId?.slice(-8) || '—'}
-                                    </dd>
-                                </div>
+                                {receipt?.consultationId && (
+                                    <div className="flex justify-between">
+                                        <dt className="text-slate-500">Consultation ID</dt>
+                                        <dd className="font-mono text-slate-800">
+                                            {receipt.consultationId.slice(-8)}
+                                        </dd>
+                                    </div>
+                                )}
+
+                                {receipt?.applicationId && (
+                                    <div className="flex justify-between">
+                                        <dt className="text-slate-500">Application ID</dt>
+                                        <dd className="font-mono text-slate-800">
+                                            {receipt.applicationId.slice(-8)}
+                                        </dd>
+                                    </div>
+                                )}
+
                                 <div className="flex justify-between">
                                     <dt className="text-slate-500">Session</dt>
                                     <dd className="font-mono text-slate-800">
                                         {receipt?.sessionId?.slice(0, 14)}…
                                     </dd>
                                 </div>
+
                                 {receipt?.amount != null && (
                                     <div className="flex justify-between">
                                         <dt className="text-slate-500">Amount</dt>
                                         <dd className="text-slate-800">
                                             {formatAmount(receipt.amount, receipt.currency)}
+                                        </dd>
+                                    </div>
+                                )}
+
+                                {receipt?.invoiceUrl && (
+                                    <div className="flex justify-between">
+                                        <dt className="text-slate-500">Invoice</dt>
+                                        <dd className="text-slate-800">
+                                            <a
+                                                href={receipt.invoiceUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-blue-600 hover:underline"
+                                            >
+                                                Download invoice
+                                            </a>
                                         </dd>
                                     </div>
                                 )}
@@ -209,7 +260,7 @@ export default function ConsultationSuccessPage() {
                         <div className="mx-auto mb-6 h-12 w-12 rounded-full bg-red-100 flex items-center justify-center">
                             <span className="text-red-700 text-2xl">!</span>
                         </div>
-                        <h1 className="text-2xl font-semibold text-slate-900">We couldn’t confirm your booking</h1>
+                        <h1 className="text-2xl font-semibold text-slate-900">We couldn’t confirm your payment</h1>
                         <p className="mt-2 text-slate-600">{error}</p>
 
                         <div className="mt-8 flex gap-3 justify-center">
