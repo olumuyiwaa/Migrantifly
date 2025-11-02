@@ -240,7 +240,7 @@ export default function ConsultationSuccessPage() {
 
                         <div className="mt-8 flex gap-3 justify-center">
                             <Link
-                                href="/"
+                                href="/portal"
                                 className="px-5 py-2.5 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800"
                             >
                                 Go to Home
