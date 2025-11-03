@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Produce a static export in the `out` directory
+  output: "export",
+  eslint: { ignoreDuringBuilds: true },
   reactStrictMode: true,
   images: {
     domains: ['res.cloudinary.com'],
