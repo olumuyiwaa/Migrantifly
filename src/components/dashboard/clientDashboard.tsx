@@ -548,9 +548,9 @@ export default function ClientDashboardPage() {
 
           {/* Quick actions */}
           <div className="grid grid-cols-1 gap-2">
-            <QuickLink href="/portal/documents" title="Upload documents" />
-            <QuickLink href="/portal/consultations" title="Book consultation" />
-            <QuickLink href="/profile" title="Update profile" />
+            <QuickLink href="/portal/my-documents" title="Upload documents" />
+            <QuickLink href="/portal/my-consultations" title="Book consultation" />
+            {/*<QuickLink href="/portal/profile" title="Update profile" />*/}
           </div>
         </div>
       </div>

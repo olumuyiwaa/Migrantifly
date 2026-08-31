@@ -139,34 +139,23 @@ export default function UserDropdown() {
             <DropdownItem
               onItemClick={closeDropdown}
               tag="a"
-              href="/profile"
+              href="/portal/profile"
               className="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
-              Edit profile
+              Profile
             </DropdownItem>
           </li>
 
-          <li>
-            <DropdownItem
-              onItemClick={closeDropdown}
-              tag="a"
-              href="/profile"
-              className="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-            >
-              Account settings
-            </DropdownItem>
-          </li>
-
-          <li>
-            <DropdownItem
-              onItemClick={closeDropdown}
-              tag="a"
-              href="/support"
-              className="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-            >
-              Support
-            </DropdownItem>
-          </li>
+          {/*<li>*/}
+          {/*  <DropdownItem*/}
+          {/*    onItemClick={closeDropdown}*/}
+          {/*    tag="a"*/}
+          {/*    href="/support"*/}
+          {/*    className="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"*/}
+          {/*  >*/}
+          {/*    Support*/}
+          {/*  </DropdownItem>*/}
+          {/*</li>*/}
         </ul>
 
         {user ? (

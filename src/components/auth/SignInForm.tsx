@@ -45,14 +45,8 @@ export default function SignInForm() {
         // Redirect based on user role
         const storedUser = JSON.parse(localStorage.getItem("migrantifly_user") || "{}");
 
-        const role = storedUser?.role || response.user?.role;
 
-        // Redirect to appropriate dashboard
-        if (role === "client") {
-          router.push("/portal/dashboard");
-        } else {
           router.push("/portal");
-        }
       } else {
         setError("Invalid credentials. Please try again.");
       }

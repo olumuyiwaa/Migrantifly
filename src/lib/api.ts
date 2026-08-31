@@ -933,7 +933,7 @@ export const paymentsApi = {
       data?: { sessionId: string; clientSecret?: string | null };
     }>("/payments/create-consultation-payment", data),
 
-  /** Create Stripe PaymentIntent for deposit */
+  /** Create Stripe PaymentIntent for deposit for application payments*/
   createDepositPayment: (data: CreateDepositPaymentRequest) =>
     postApi<{
       success: boolean;

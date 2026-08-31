@@ -92,6 +92,11 @@ const clientNavItems: NavItem[] = [
     name: 'My Consultations',
     path: '/portal/my-consultations',
   },
+  {
+    icon: <ChatIcon />,
+    name: 'Payments',
+    path: '/portal/payments',
+  },
 ];
 
 const othersItems: NavItem[] = [
