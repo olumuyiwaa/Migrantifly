@@ -64,7 +64,6 @@ export interface ErrorResponse {
 // ---------- auth / user ----------
 
 export interface UserProfile {
-  // Profile is intentionally open – backend accepts additionalProperties
   firstName?: string;
   lastName?: string;
   phone?: string;

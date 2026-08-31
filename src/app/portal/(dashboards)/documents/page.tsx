@@ -366,16 +366,16 @@ export default function DocumentManagementPage() {
                                         <td className="px-4 py-3">
                                             <div>
                                                 <p className="font-medium text-gray-800 dark:text-white/90">
-                                                    {doc.documentType || doc.type || 'Untitled'}
+                                                    {String(doc.documentType) || String(doc.type) || 'Untitled'}
                                                 </p>
                                                 {doc.originalName && (
                                                     <p className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[200px]">
-                                                        {doc.originalName}
+                                                        {String(doc.originalName)}
                                                     </p>
                                                 )}
                                                 {doc.fileSize && (
                                                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                                                        {formatFileSize(doc.fileSize)}
+                                                        {formatFileSize(Number(doc.fileSize))}
                                                     </p>
                                                 )}
                                             </div>
@@ -429,7 +429,7 @@ export default function DocumentManagementPage() {
                                             {formatDateTime(doc.createdAt)}
                                             {doc.reviewedAt && (
                                                 <p className="text-xs text-gray-400 dark:text-gray-500">
-                                                    Reviewed: {formatDateTime(doc.reviewedAt)}
+                                                    Reviewed: {formatDateTime(String(doc.reviewedAt))}
                                                 </p>
                                             )}
                                         </td>
@@ -531,11 +531,11 @@ export default function DocumentManagementPage() {
                                     Review Document
                                 </h2>
                                 <p className="mt-1 text-theme-sm text-gray-500 dark:text-gray-400">
-                                    {selectedDocument.documentType || selectedDocument.type || 'Untitled'}
+                                    {String(selectedDocument.documentType) || String(selectedDocument.type) || 'Untitled'}
                                 </p>
                                 {selectedDocument.originalName && (
                                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                                        {selectedDocument.originalName}
+                                        {String(selectedDocument.originalName)}
                                     </p>
                                 )}
                             </div>
@@ -650,10 +650,10 @@ export default function DocumentManagementPage() {
 
                         <div className="space-y-4">
                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                Are you sure you want to delete document "{selectedDocument.documentType || selectedDocument.type}"?
+                                Are you sure you want to delete document "{String(selectedDocument.documentType) || String(selectedDocument.type)}"?
                                 {selectedDocument.originalName && (
                                     <span className="block mt-1 text-xs text-gray-500 dark:text-gray-500">
-                                        File: {selectedDocument.originalName}
+                                        File: {String(selectedDocument.originalName)}
                                     </span>
                                 )}
                                 <span className="block mt-1 text-xs text-gray-500 dark:text-gray-500">
