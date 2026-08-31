@@ -9,11 +9,13 @@ export function ConsultationPaymentCard({
                                             paymentId,
                                             email,
                                             amount = 150,
+                                            onPaid,
                                         }: {
     consultationId: string;
     paymentId?: string | null;
     email?: string;
     amount?: number;
+    onPaid?: () => void;
 }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);

@@ -50,9 +50,9 @@ export async function createDepositIntent(params: {
     amount: number;
 }): Promise<{ clientSecret?: string; paymentIntentId?: string; error?: string }> {
     try {
-        const res = await paymentsApi.createDepositPayment({
+        const res = await paymentsApi.createDepositCheckout({
             applicationId: params.applicationId,
-            amount: params.amount,
+            amount: 500,
         });
 
         const clientSecret =
