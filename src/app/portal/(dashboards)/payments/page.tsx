@@ -9,6 +9,7 @@ import {
     type PaymentType,
     type PaymentStatus,
 } from '@/lib/api';
+import { InvoiceModal } from '@/components/common/InvoiceModal';
 
 // ---------- helpers ----------
 
@@ -73,6 +74,8 @@ export default function ClientPaymentsPage() {
     const [payments, setPayments] = useState<Payment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
+    const [invoiceOpen, setInvoiceOpen] = useState(false);
 
     const fetchHistory = useCallback(async () => {
         setLoading(true);
@@ -93,6 +96,16 @@ export default function ClientPaymentsPage() {
     useEffect(() => {
         fetchHistory();
     }, [fetchHistory]);
+
+    const openInvoice = (payment: Payment) => {
+        setSelectedPayment(payment);
+        setInvoiceOpen(true);
+    };
+
+    const closeInvoice = () => {
+        setInvoiceOpen(false);
+        setSelectedPayment(null);
+    };
 
     // Summary stats
     const completed = payments.filter((p) => p.status === 'completed');
@@ -174,26 +187,15 @@ export default function ClientPaymentsPage() {
                 ) : payments.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-16 text-center">
                         <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-gray-100 dark:bg-white/5">
-                            <svg
-                                className="size-6 text-gray-400"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={1.5}
-                                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                                />
+                            <svg className="size-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                             </svg>
                         </div>
                         <h3 className="text-sm font-medium text-gray-800 dark:text-white/90">
                             No payments yet
                         </h3>
                         <p className="mt-1 max-w-sm text-theme-sm text-gray-500 dark:text-gray-400">
-                            Consultation fees and application deposits will appear here once
-                            you make a payment.
+                            Consultation fees and application deposits will appear here once you make a payment.
                         </p>
                     </div>
                 ) : (
@@ -201,24 +203,12 @@ export default function ClientPaymentsPage() {
                         <table className="w-full min-w-[640px] text-left text-sm">
                             <thead>
                             <tr className="border-b border-gray-100 dark:border-gray-800">
-                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                    Date
-                                </th>
-                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                    Type
-                                </th>
-                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                    Amount
-                                </th>
-                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                    Status
-                                </th>
-                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                    Reference
-                                </th>
-                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                    Invoice
-                                </th>
+                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">Date</th>
+                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">Type</th>
+                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">Amount</th>
+                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">Status</th>
+                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">Reference</th>
+                                <th className="px-5 py-3.5 text-theme-xs font-medium text-gray-500 dark:text-gray-400">Invoice</th>
                             </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-50 dark:divide-gray-800/60">
@@ -272,31 +262,16 @@ export default function ClientPaymentsPage() {
                                         </td>
 
                                         <td className="px-5 py-4">
-                                            {payment.invoiceUrl ? (
-                                                <a
-                                                    href={payment.invoiceUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400"
-                                                >
-                                                    <svg
-                                                        className="size-4"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth={2}
-                                                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                                        />
-                                                    </svg>
-                                                    Download
-                                                </a>
-                                            ) : (
-                                                <span className="text-theme-xs text-gray-400">—</span>
-                                            )}
+                                            <button
+                                                type="button"
+                                                onClick={() => openInvoice(payment)}
+                                                className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400"
+                                            >
+                                                <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                View Invoice
+                                            </button>
                                         </td>
                                     </tr>
                                 );
@@ -306,6 +281,16 @@ export default function ClientPaymentsPage() {
                     </div>
                 )}
             </div>
+
+            {/* Invoice Modal */}
+            <InvoiceModal
+                payment={selectedPayment}
+                isOpen={invoiceOpen}
+                onClose={closeInvoice}
+                // Optionally pass client name/email from auth context
+                // clientName={user?.profile?.firstName + ' ' + user?.profile?.lastName}
+                // clientEmail={user?.email}
+            />
         </div>
     );
 }
