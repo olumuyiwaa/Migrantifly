@@ -9,6 +9,7 @@ import {
   ApiError,
 } from '@/lib/api';
 import RequiredDocumentsSection from "@/components/applications/RequiredDocumentsSection";
+import {DepositPaymentCard} from "@/components/payments/DepositPaymentCard";
 
 // ---------- types (flexible — dashboard payload varies) ----------
 
@@ -498,6 +499,16 @@ export default function ClientApplicationDetailPage() {
               <Row label="Updated" value={formatDate(app.updatedAt)} />
             </dl>
           </section>
+            {/* Deposit payment — only before deposit is paid */}
+            {(app.stage === 'consultation' || app.stage === 'pending_deposit') && (
+                <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-dark">
+                <DepositPaymentCard
+                    applicationId={app._id}
+                    amount={500}
+                    onPaid={load}
+                />
+              </section>
+              )}
 
           <section className="rounded-xl border border-gray-200 bg-white shadow-theme-xs dark:border-gray-800 dark:bg-gray-dark">
             <div className="border-b border-gray-200 px-5 py-4 dark:border-gray-800">

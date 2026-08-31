@@ -22,7 +22,7 @@ const AlertCircleIcon = ({ className = "w-5 h-5" }) => (
     </svg>
 );
 
-const stripePromise = loadStripe("pk_test_51SKZtKD3g7MoYNaI33fLyF5m4heLMOFHfNgFaIUtNR8vvc0vDn2oijlblz1v5b4QpkCTX97nYOV26cFLWa7cpcsR004RA7L2WA");
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY||"pk_test_51SKZtKD3g7MoYNaI33fLyF5m4heLMOFHfNgFaIUtNR8vvc0vDn2oijlblz1v5b4QpkCTX97nYOV26cFLWa7cpcsR004RA7L2WA");
 
 export default function BookingFlow({ initialData = {}, onClose }) {
     const [step, setStep] = useState(1); // 1: Info, 2: Slot Selection, 3: Review, 4: Payment

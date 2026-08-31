@@ -14,7 +14,7 @@ import {
   HorizontaLDots,
   CalenderIcon,
   TransactionsIcon,
-  UserCircleIcon,
+  UserCircleIcon, DollarLineIcon,
 } from '../icons/index';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { getStoredUser, type AuthUserSummary, type UserRole } from '@/lib/api';
@@ -93,7 +93,7 @@ const clientNavItems: NavItem[] = [
     path: '/portal/my-consultations',
   },
   {
-    icon: <ChatIcon />,
+    icon: <DollarLineIcon />,
     name: 'Payments',
     path: '/portal/payments',
   },

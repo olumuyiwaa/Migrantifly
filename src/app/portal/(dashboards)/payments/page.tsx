@@ -9,7 +9,7 @@ import {
     type PaymentType,
     type PaymentStatus,
 } from '@/lib/api';
-import { InvoiceModal } from '@/components/common/InvoiceModal';
+import { InvoiceModal } from '@/components/payments/InvoiceModal';
 
 // ---------- helpers ----------
 

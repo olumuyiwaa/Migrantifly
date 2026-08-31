@@ -10,6 +10,7 @@ import {
   type EditConsultationRequest,
   type ConsultationMethod,
 } from '@/lib/api';
+import {ConsultationPaymentCard} from "@/components/payments/ConsultationPaymentCard";
 
 // ---------- helpers ----------
 
@@ -280,21 +281,14 @@ export default function ClientConsultationDetailPage() {
             )}
           </section>
 
-          {item.status === 'pending_payment' && (
-            <div className="rounded-xl border border-warning-200 bg-warning-50 px-4 py-4 dark:border-warning-500/30 dark:bg-warning-500/10">
-              <p className="text-sm font-medium text-warning-800 dark:text-warning-300">
-                Payment required
-              </p>
-              <p className="mt-1 text-theme-sm text-warning-700 dark:text-warning-400">
-                Complete the consultation fee to confirm this booking.
-              </p>
-              <Link
-                href="/portal/payments"
-                className="mt-3 inline-block text-sm font-medium text-brand-600 hover:text-brand-700"
-              >
-                Go to payments →
-              </Link>
-            </div>
+          {(item.status === 'pending_payment' || item.status === 'pending') && (
+              <ConsultationPaymentCard
+                  consultationId={item._id}
+                  paymentId={String(any.paymentId || item._id)}
+                  email={item.clientEmail || ''}
+                  amount={50} // TODO: from config/backend
+                  onPaid={load}
+              />
           )}
         </div>
 

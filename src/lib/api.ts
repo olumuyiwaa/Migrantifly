@@ -926,22 +926,27 @@ export const notificationsApi = {
 // ---------- payments ----------
 
 export const paymentsApi = {
-  /** Create Stripe Checkout Session for consultation fee */
-  createConsultationPayment: (data: CreateConsultationPaymentRequest) =>
-    postApi<{
-      success: boolean;
-      data?: { sessionId: string; clientSecret?: string | null };
-    }>("/payments/create-consultation-payment", data),
+  /** Consultation — public Checkout Session */
+  createConsultationPayment: (data: {
+    consultationId: string;
+    paymentId: string;
+    amount: number;
+    email: string;
+  }) =>
+      postApi<{
+        success: boolean;
+        data?: { sessionId: string; url?: string };
+      }>('/payments/create-consultation-payment', data),
 
-  /** Create Stripe PaymentIntent for deposit for application payments*/
-  createDepositPayment: (data: CreateDepositPaymentRequest) =>
-    postApi<{
-      success: boolean;
-      data?: { clientSecret?: string; paymentIntentId?: string };
-      clientSecret?: string;
-      paymentIntentId?: string;
-    }>("/payments/create-deposit-payment", data),
-
+  /** Deposit — auth required, Checkout Session (NOT PaymentIntent) */
+  createDepositCheckout: (data: {
+    applicationId: string;
+    amount: number; // must be 500
+  }) =>
+      postApi<{
+        success: boolean;
+        data?: { sessionId: string; url: string; paymentId: string };
+      }>('/payments/create-deposit-checkout', data),
   /** Confirm a completed payment */
   confirm: (data: ConfirmPaymentRequest) =>
     postApi<{
