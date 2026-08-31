@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import {EyeCloseIcon, EyeIcon} from "@/icons";
 
 export default function SetupAccountForm({ token }) {
     const router = useRouter();
@@ -174,7 +174,7 @@ export default function SetupAccountForm({ token }) {
                             className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                             aria-label={showPassword ? 'Hide password' : 'Show password'}
                         >
-                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            {showPassword ? <EyeCloseIcon size={18} /> : <EyeIcon size={18} />}
                         </button>
                     </div>
                 </div>
@@ -201,7 +201,6 @@ export default function SetupAccountForm({ token }) {
                 >
                     {loading ? (
                         <>
-                            <Loader2 className="animate-spin mr-2" size={16} />
                             Completing…
                         </>
                     ) : (

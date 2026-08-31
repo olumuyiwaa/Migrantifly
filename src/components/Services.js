@@ -1,15 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, ChevronRight, Users, Briefcase, Heart, MapPin, FileCheck } from "lucide-react";
+import {FileIcon, Tracking, HeartIcon, BriefcaseIcon, GroupIcon, ChevronLeftIcon, ChevronDownIcon} from "@/icons";
 
 const serviceCategories = [
   {
     id: "visa-advice",
     title: "Visa Advice and Application Services",
-    icon: <FileCheck className="w-6 h-6" />,
+    icon: <FileIcon className="w-6 h-6" />,
     description: "Complete visa guidance from application to approval",
-    color: "bg-blue-50 border-blue-200",
     iconColor: "text-blue-600",
     services: [
       {
@@ -41,9 +40,8 @@ const serviceCategories = [
   {
     id: "employer-services",
     title: "Employer Services (Business Immigration Support)",
-    icon: <Briefcase className="w-6 h-6" />,
+    icon: <BriefcaseIcon className="w-6 h-6" />,
     description: "Supporting businesses with immigration compliance and staff visas",
-    color: "bg-green-50 border-green-200",
     iconColor: "text-green-600",
     services: [
       {
@@ -61,9 +59,8 @@ const serviceCategories = [
   {
     id: "family-partnership",
     title: "Family and Partnership Support",
-    icon: <Heart className="w-6 h-6" />,
+    icon: <HeartIcon className="w-6 h-6" />,
     description: "Guidance for family reunification and relationships",
-    color: "bg-pink-50 border-pink-200",
     iconColor: "text-pink-600",
     services: [
       {
@@ -80,9 +77,8 @@ const serviceCategories = [
   {
     id: "immigration-strategy",
     title: "Immigration Strategy and Settlement Planning",
-    icon: <MapPin className="w-6 h-6" />,
+    icon: <Tracking className="w-6 h-6" />,
     description: "Long-term planning for your immigration journey",
-    color: "bg-purple-50 border-purple-200",
     iconColor: "text-purple-600",
     services: [
       {
@@ -99,9 +95,8 @@ const serviceCategories = [
   {
     id: "other-services",
     title: "Additional Support Services",
-    icon: <Users className="w-6 h-6" />,
+    icon: <GroupIcon className="w-6 h-6" />,
     description: "Comprehensive support for all your immigration needs",
-    color: "bg-amber-50 border-amber-200",
     iconColor: "text-amber-600",
     services: [
       {
@@ -143,7 +138,7 @@ export default function ImmigrationServices() {
           {serviceCategories.map((service) => (
             <div
               key={service.id}
-              className={`${service.color} border-2 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg`}
+              className={`border-2 rounded-2xl overflow-hidden transition-all duration-100 hover:shadow-lg`}
             >
               {/* Service Header */}
               <div
@@ -169,9 +164,9 @@ export default function ImmigrationServices() {
                       Learn More
                     </button>
                     {expandedService === service.id ? (
-                      <ChevronDown className="w-6 h-6 text-gray-600" />
+                      <ChevronDownIcon className="w-6 h-6 text-gray-600" />
                     ) : (
-                      <ChevronRight className="w-6 h-6 text-gray-600" />
+                      <ChevronLeftIcon className="w-6 h-6 text-gray-600" />
                     )}
                   </div>
                 </div>

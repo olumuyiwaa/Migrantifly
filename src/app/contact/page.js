@@ -1,7 +1,7 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import { MapPin, Phone, Mail } from 'lucide-react'
 import BookingFlow from "@/components/BookingFlow";
+import {BoltIcon, EnvelopeIcon} from "@/icons";
 
 export default function Contact() {
   return (
@@ -115,7 +115,7 @@ export default function Contact() {
               </h2>
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <MapPin className="w-5 h-5 mr-3 text-gold-400" />
+                  <BoltIcon className="w-5 h-5 mr-3 text-gold-400" />
                   <span className="text-xl">16 Nandi Lane, Ranui, Auckland, New Zealand</span>
                 </div>
                {/*  <div className="flex items-center">
@@ -123,7 +123,7 @@ export default function Contact() {
                   <span className="text-xl">+234 xxx xxx xxxx</span>
                 </div> */}
                 <div className="flex items-center">
-                  <Mail className="w-5 h-5 mr-3 text-gold-400" />
+                  <EnvelopeIcon className="w-5 h-5 mr-3 text-gold-400" />
                   <span className="text-xl">Migrantifly@gmail.com</span>
                 </div>
               </div>

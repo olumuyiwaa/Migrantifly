@@ -1,0 +1,38 @@
+<svg
+        width="25"
+        height="24"
+        viewBox="0 0 25 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+>
+    <!-- Warehouse roof -->
+    <path
+            d="M3.5 10L12.5 4L21.5 10V20C21.5 20.5523 21.0523 21 20.5 21H4.5C3.94772 21 3.5 20.5523 3.5 20V10Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+    />
+
+    <!-- Warehouse front -->
+    <path
+            d="M3.5 10H21.5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+    />
+
+    <!-- Warehouse door -->
+    <path
+            d="M9 21V13H16V21"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+    />
+
+    <!-- Warehouse door divider -->
+    <path
+            d="M12.5 13V21"
+            stroke="currentColor"
+            stroke-width="1.5"
+    />
+</svg>

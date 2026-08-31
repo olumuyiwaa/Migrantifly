@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { MapPin, Phone, Mail } from 'lucide-react'
+import {EnvelopeIcon, Tracking} from "@/icons";
 
 export default function Footer() {
   return (
@@ -15,7 +15,7 @@ export default function Footer() {
                 From dreaming to thriving — we guide you through every step of your migration journey.            </p>
             <div className="space-y-2 text-sm">
               <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2" />
+                <Tracking className="w-4 h-4 mr-2" />
                 <span>16 Nandi Lane, Ranui, Auckland, New Zealand </span>
               </div>
              {/* <div className="flex items-center">
@@ -23,7 +23,7 @@ export default function Footer() {
                 <span>+234 xxx xxx xxxx</span>
               </div>*/}
               <div className="flex items-center">
-                <Mail className="w-4 h-4 mr-2" />
+                <EnvelopeIcon className="w-4 h-4 mr-2" />
                 <span>Migrantifly@gmail.com</span>
               </div>
             </div>
