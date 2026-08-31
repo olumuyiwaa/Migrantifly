@@ -62,6 +62,13 @@ export interface ErrorResponse {
 }
 
 // ---------- auth / user ----------
+export interface Address {
+  street?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  postalCode?: string;
+}
 
 export interface UserProfile {
   firstName?: string;
@@ -69,7 +76,7 @@ export interface UserProfile {
   phone?: string;
   dateOfBirth?: string;
   nationality?: string;
-  address?: string;
+  address?: string | Address;
   [key: string]: unknown;
 }
 
@@ -185,6 +192,7 @@ export interface DocumentChecklistItem {
 export interface Payment extends MongoDoc {
   clientId: string;
   applicationId?: string | null;
+  consultationId?: string | null;
   amount: number;
   currency: string;
   type: PaymentType;
@@ -193,6 +201,8 @@ export interface Payment extends MongoDoc {
   gatewayReference?: string;
   invoiceUrl?: string | null;
   invoiceNumber?: string | null;
+  notes?: string;
+  refundAmount?: number;
 }
 
 // ---------- notifications ----------
