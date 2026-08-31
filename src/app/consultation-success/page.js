@@ -1,12 +1,33 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const API_BASE = 'https://migrantifly-backend.onrender.com/api';
 
 export default function ConsultationSuccessPage() {
+    return (
+        <Suspense fallback={<ConsultationSuccessFallback />}>
+            <ConsultationSuccessContent />
+        </Suspense>
+    );
+}
+
+function ConsultationSuccessFallback() {
+    return (
+        <main className="min-h-[70vh] flex items-center justify-center px-6 py-16 bg-slate-50">
+            <div className="w-full max-w-xl bg-white shadow-lg rounded-2xl p-8 border border-slate-200">
+                <div className="text-center">
+                    <div className="mx-auto mb-6 h-12 w-12 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin" />
+                    <h1 className="text-2xl font-semibold text-slate-800">Finalizing your payment…</h1>
+                </div>
+            </div>
+        </main>
+    );
+}
+
+function ConsultationSuccessContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
