@@ -8,6 +8,7 @@ import {
     documentsApi,
     deadlinesApi,
     ApiError,
+    getStoredUser,
     type Application,
     type ApplicationStage,
     type User,
@@ -23,6 +24,7 @@ import { AddPpiModal } from './AddPpiModal';
 import { RecordDecisionModal } from './RecordDecisionModal';
 import { StageUpdateModal } from './StageUpdateModal';
 import { AssignAdviserModal } from './AssignAdviserModal';
+import MessagingPanel from './MessagingPanel';
 
 // ---------- Labels & badge colours ----------
 const STAGE_LABELS: Record<ApplicationStage, string> = {
@@ -858,6 +860,12 @@ export function ApplicationDetailModal({
                                     </div>
                                 )}
                             </div>
+
+                            {/* Messages with client */}
+                            <MessagingPanel
+                                applicationId={application._id}
+                                currentUserId={getStoredUser()?.id}
+                            />
 
                             {/* Notes */}
                             {application.notes && (

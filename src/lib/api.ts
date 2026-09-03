@@ -85,6 +85,7 @@ export interface User extends MongoDoc {
   role: UserRole;
   profile?: UserProfile;
   isActive?: boolean;
+  smsOptIn?: boolean;
 }
 
 export interface AuthUserSummary {
@@ -304,6 +305,7 @@ export interface EditConsultationRequest {
 
 export interface UpdateClientProfileRequest {
   profile: UserProfile;
+  smsOptIn?: boolean;
 }
 
 export interface ReviewDocumentRequest {
@@ -354,13 +356,43 @@ export type WebSocketEventType =
     | 'application_updated'
     | 'stage_changed'
     | 'adviser_assigned'
-    | 'decision_recorded';
+    | 'decision_recorded'
+    | 'new_message';
 
 export interface WebSocketEvent {
   type: WebSocketEventType;
   applicationId: string;
   data: any;
   timestamp: string;
+}
+
+// ---------- messaging ----------
+
+export interface MessageSender {
+  _id: string;
+  role: UserRole;
+  profile?: { firstName?: string; lastName?: string };
+}
+
+export interface Message extends MongoDoc {
+  applicationId: string;
+  senderId: MessageSender | string;
+  senderRole: UserRole;
+  content: string;
+  attachments?: { fileName?: string; fileUrl?: string; fileType?: string }[];
+  readBy?: { userId: string; readAt: string }[];
+  isSystemMessage?: boolean;
+}
+
+// ---------- feedback ----------
+
+export interface Feedback extends MongoDoc {
+  applicationId: string;
+  clientId: string;
+  rating: number;
+  comments?: string;
+  wouldRecommend?: boolean;
+  submittedAt?: string;
 }
 
 
@@ -634,6 +666,18 @@ export const adminApi = {
           data
       ),
 
+  /** Change a user's role */
+  changeUserRole: (userId: string, role: UserRole) =>
+      patchApi<{ success?: boolean; message?: string; data?: User }>(
+          `/admin/users/${userId}/role`,
+          { role }
+      ),
+
+  feedback: (params?: { page?: number; limit?: number }) =>
+      fetchApi<{ success?: boolean; data?: Feedback[]; pagination?: { total?: number }; averageRating?: number | null }>(
+          `/admin/feedback${buildQuery(params)}`
+      ),
+
   assignAdviser: (applicationId: string, data: AssignAdviserRequest) =>
       patchApi<{ success?: boolean; message?: string }>(
           `/admin/applications/${applicationId}/assign-adviser`,
@@ -710,6 +754,26 @@ export const applicationsApi = {
   recordDecision: (id: string, data: RecordDecisionRequest) =>
     patchApi<{ success?: boolean; data?: Application }>(
       `/applications/${id}/decision`,
+      data
+    ),
+
+  /** Get message thread for an application (client, assigned adviser, or admin) */
+  getMessages: (id: string, params?: { before?: string; limit?: number }) =>
+    fetchApi<{ success?: boolean; data?: Message[] }>(
+      `/applications/${id}/messages${buildQuery(params)}`
+    ),
+
+  /** Send a message on an application's thread */
+  sendMessage: (id: string, content: string) =>
+    postApi<{ success?: boolean; data?: Message }>(
+      `/applications/${id}/messages`,
+      { content }
+    ),
+
+  /** Client: submit feedback after a decision has been recorded */
+  submitFeedback: (id: string, data: { rating: number; comments?: string; wouldRecommend?: boolean }) =>
+    postApi<{ success?: boolean; message?: string; data?: Feedback }>(
+      `/applications/${id}/feedback`,
       data
     ),
 };

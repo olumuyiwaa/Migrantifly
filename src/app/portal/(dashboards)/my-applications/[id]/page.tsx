@@ -7,9 +7,12 @@ import {
   applicationsApi,
   documentsApi,
   ApiError,
+  getStoredUser,
 } from '@/lib/api';
 import RequiredDocumentsSection from "@/components/applications/RequiredDocumentsSection";
 import {DepositPaymentCard} from "@/components/payments/DepositPaymentCard";
+import MessagingPanel from "@/components/applications/MessagingPanel";
+import FeedbackForm from "@/components/applications/FeedbackForm";
 
 // ---------- types (flexible — dashboard payload varies) ----------
 
@@ -200,6 +203,7 @@ export default function ClientApplicationDetailPage() {
   const id = String(params?.id ?? '');
 
   const [app, setApp] = useState<ApplicationCore | null>(null);
+  const currentUserId = getStoredUser()?.id;
   const [docs, setDocs] = useState<DocumentRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -466,6 +470,9 @@ export default function ClientApplicationDetailPage() {
                   visaType={app.visaType}
               />
           )}
+
+          {/* Messages with your adviser */}
+          <MessagingPanel applicationId={app._id} currentUserId={currentUserId} />
         </div>
 
         {/* Sidebar */}
@@ -509,6 +516,10 @@ export default function ClientApplicationDetailPage() {
                 />
               </section>
               )}
+
+          {(app.outcome || app.decisionOutcome) && (
+              <FeedbackForm applicationId={app._id} />
+          )}
 
           <section className="rounded-xl border border-gray-200 bg-white shadow-theme-xs dark:border-gray-800 dark:bg-gray-dark">
             <div className="border-b border-gray-200 px-5 py-4 dark:border-gray-800">

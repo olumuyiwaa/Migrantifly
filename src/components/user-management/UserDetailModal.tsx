@@ -590,9 +590,7 @@ export default function UserDetailModal({
                   Role
                 </h3>
                 <p className="mt-1 text-theme-xs text-gray-500 dark:text-gray-400">
-                  Changing role updates access across the portal. Requires backend
-                  support for{' '}
-                  <code className="text-xs">PATCH /admin/users/:id</code>.
+                  Changing role updates access across the portal.
                 </p>
                 <div className="mt-3 flex flex-wrap items-end gap-3">
                   <div className="w-full sm:w-48">

@@ -682,6 +682,9 @@ export default function ProfileManagementPage() {
                 </div>
             </div>
 
+            {/* SMS notification preference */}
+            <SmsPreferenceCard user={user} onUpdated={setUser} />
+
             {/* Stats */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <StatCard label="Role" value={ROLE_LABELS[user.role] ?? user.role} />
@@ -882,6 +885,72 @@ function StatCard({
             >
                 {value}
             </p>
+        </div>
+    );
+}
+
+function SmsPreferenceCard({
+    user,
+    onUpdated,
+}: {
+    user: User;
+    onUpdated: (user: User) => void;
+}) {
+    const [saving, setSaving] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const optedIn = user.smsOptIn !== false;
+    const hasPhone = !!user.profile?.phone;
+
+    const toggle = async () => {
+        setSaving(true);
+        setError(null);
+        try {
+            const res = await clientApi.updateProfile({
+                profile: user.profile || {},
+                smsOptIn: !optedIn,
+            });
+            const updated = (res as { data?: User }).data;
+            if (updated) onUpdated(updated);
+        } catch (err) {
+            setError(err instanceof ApiError ? err.message : 'Failed to update preference');
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    return (
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-dark">
+            <div className="flex items-center justify-between gap-4">
+                <div>
+                    <h3 className="text-sm font-semibold text-gray-800 dark:text-white/90">
+                        SMS notifications
+                    </h3>
+                    <p className="mt-1 text-theme-xs text-gray-500 dark:text-gray-400">
+                        {hasPhone
+                            ? 'Get a text for urgent deadlines and updates, in addition to email.'
+                            : 'Add a phone number above to enable SMS alerts.'}
+                    </p>
+                </div>
+                <button
+                    type="button"
+                    role="switch"
+                    aria-checked={optedIn}
+                    disabled={saving || !hasPhone}
+                    onClick={toggle}
+                    className={`relative h-6 w-11 shrink-0 rounded-full transition-colors disabled:opacity-40 ${
+                        optedIn ? 'bg-brand-500' : 'bg-gray-200 dark:bg-gray-700'
+                    }`}
+                >
+                    <span
+                        className={`absolute top-0.5 size-5 rounded-full bg-white shadow transition-transform ${
+                            optedIn ? 'translate-x-5' : 'translate-x-0.5'
+                        }`}
+                    />
+                </button>
+            </div>
+            {error && (
+                <p className="mt-2 text-theme-xs text-error-600 dark:text-error-400">{error}</p>
+            )}
         </div>
     );
 }

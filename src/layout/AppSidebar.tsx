@@ -15,6 +15,7 @@ import {
   CalenderIcon,
   TransactionsIcon,
   UserCircleIcon, DollarLineIcon,
+  ShootingStarIcon,
 } from '../icons/index';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { getStoredUser, type AuthUserSummary, type UserRole } from '@/lib/api';
@@ -62,6 +63,11 @@ const adminNavItems: NavItem[] = [
     icon: <TransactionsIcon />,
     name: 'Transactions',
     path: '/portal/transactions',
+  },
+  {
+    icon: <ShootingStarIcon />,
+    name: 'Feedback',
+    path: '/portal/feedback',
   },
 ];
 
