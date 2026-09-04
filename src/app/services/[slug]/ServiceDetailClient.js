@@ -1,247 +1,284 @@
-// src/app/services/[slug]/ServiceDetailClient.js (Client Component)
-'use client'
-import { useState } from 'react'
+'use client';
+
+import { useState } from 'react';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import Link from 'next/link';
-import services from '../../../data/services';
 import BookNowModal from '../../../components/BookNowModal';
 
-export default function ServiceDetailClient({ service }) {
+export default function ServiceDetailClient({ service, otherServices = [] }) {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
+    name: '',
+    phone: '',
+    email: '',
+    message: '',
   });
 
   const handleInputChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-
-    // Add success handling here
     alert('Thank you! We will contact you soon.');
-
-    // Reset form and close modal
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      message: "",
-    });
+    setFormData({ name: '', phone: '', email: '', message: '' });
     setShowModal(false);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    // Optionally reset form when closing
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      message: "",
-    });
+    setFormData({ name: '', phone: '', email: '', message: '' });
   };
 
+  const content = service.content ?? {};
+  const features = service.features ?? [];
+  const countries = service.countries ?? [];
+  const processSteps = service.processSteps ?? [];
+  const sections = content.sections ?? [];
+  const checklist = content.checklist ?? [];
+
   return (
-    <main>
-      <Header />
+      <main>
+        <Header />
 
-      {/* Hero Section */}
-      <div className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[55vh]"
-          style={{ backgroundImage: service.image ? `url(${service.image})` : 'url("/images/bg.png")' }}>
-          <div className="absolute inset-0 bg-black/50"></div>
-          <div className="relative z-10 text-center text-white items-center pt-32">
-            <div className="text-6xl mb-4">{service.icon}</div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{service.title}</h1>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto px-4">{service.description}</p>
+        {/* Hero */}
+        <div
+            className="relative min-h-[55vh] bg-cover bg-center bg-slate-800 py-20"
+            style={{
+              backgroundImage: service.image
+                  ? `url(${service.image})`
+                  : 'url("/images/bg.png")',
+            }}
+        >
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="relative z-10 items-center pt-32 text-center text-white">
+            {service.icon && <div className="mb-4 text-6xl">{service.icon}</div>}
+            <h1 className="mb-4 text-4xl font-bold md:text-5xl">{service.title}</h1>
+            <p className="mx-auto max-w-2xl px-4 text-lg text-gray-300">
+              {service.description}
+            </p>
           </div>
-      </div>
+        </div>
 
-      {/* Content + Sidebar */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
-          {/* Main Content */}
-          <article className="lg:col-span-2">
-            {/* Introduction */}
-            <div className="prose prose-lg max-w-none mb-12">
-              <p className="text-xl text-gray-700 leading-relaxed">{service.content.introduction}</p>
-            </div>
-
-            {/* Key Features */}
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">What We Offer</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                {service.features.map((feature, index) => (
-                  <div key={index} className="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mb-4">
-                      <span className="text-white font-bold">✓</span>
-                    </div>
-                    <h3 className="font-semibold text-gray-900 mb-2">{feature}</h3>
+        <section className="bg-white py-16">
+          <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
+            {/* Main */}
+            <article className="lg:col-span-2">
+              {content.introduction && (
+                  <div className="prose prose-lg mb-12 max-w-none">
+                    <p className="text-xl leading-relaxed text-gray-700">
+                      {content.introduction}
+                    </p>
                   </div>
-                ))}
-              </div>
-            </div>
+              )}
 
-            {/* Detailed Sections */}
-            <div className="space-y-10">
-              {service.content.sections.map((section, index) => (
-                <section key={index} className="border-b border-gray-200 pb-8 last:border-b-0">
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-4">{section.title}</h2>
-                  <div className="text-gray-800 leading-relaxed whitespace-pre-line mb-6">
-                    {section.content}
-                  </div>
-
-                  {section.subsections && (
-                    <div className="space-y-4">
-                      {section.subsections.map((sub, i) => (
-                        <div key={i} className="pl-6 border-l-4 border-blue-600 bg-blue-50 p-4 rounded-r">
-                          <h3 className="font-semibold text-blue-700 mb-2">{sub.subtitle}</h3>
-                          <p className="text-gray-700">{sub.details}</p>
-                        </div>
+              {features.length > 0 && (
+                  <div className="mb-12">
+                    <h2 className="mb-6 text-2xl font-bold text-gray-900">
+                      What We Offer
+                    </h2>
+                    <div className="grid gap-6 md:grid-cols-3">
+                      {features.map((feature, index) => (
+                          <div
+                              key={index}
+                              className="rounded-lg border border-blue-100 bg-blue-50 p-6"
+                          >
+                            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
+                              <span className="font-bold text-white">✓</span>
+                            </div>
+                            <h3 className="mb-2 font-semibold text-gray-900">
+                              {feature}
+                            </h3>
+                          </div>
                       ))}
                     </div>
-                  )}
-                </section>
-              ))}
-            </div>
-
-            {/* Conclusion */}
-            {service.content.conclusion && (
-              <div className="mt-12 bg-gray-50 p-8 rounded-lg">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Ready to Get Started?</h2>
-                <p className="text-gray-800 mb-6">{service.content.conclusion}</p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-                    Book Consultation
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Checklist */}
-            {service.content.checklist && (
-              <div className="mt-12">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Essential Checklist</h3>
-                <div className="bg-green-50 p-6 rounded-lg">
-                  <ul className="space-y-2">
-                    {service.content.checklist.map((item, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
-                          <span className="text-white text-xs">✓</span>
-                        </span>
-                        <span className="text-gray-800">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-          </article>
-
-          {/* Sidebar */}
-          <aside className="space-y-8">
-            {/* Quick Info */}
-            <div className="bg-blue-600 text-white rounded-lg overflow-hidden">
-              <div className="px-6 py-4 bg-blue-700">
-                <h3 className="text-lg font-bold">Quick Information</h3>
-              </div>
-              <div className="px-6 py-6 space-y-4">
-                <div>
-                  <p className="text-blue-100 text-sm">Processing Time</p>
-                  <p className="font-semibold">{service.processingTime}</p>
-                </div>
-                <div>
-                  <p className="text-blue-100 text-sm">Available Countries</p>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {service.countries.map((country, index) => (
-                      <span key={index} className="bg-blue-500 px-2 py-1 rounded text-xs">
-                        {country}
-                      </span>
-                    ))}
                   </div>
-                </div>
-                <div>
-                  <p className="text-blue-100 text-sm">Expert Consultant</p>
-                  <p className="font-semibold">{service.author}</p>
-                </div>
-              </div>
-            </div>
+              )}
 
-            {/* Process Steps */}
-            <div className="bg-gray-50 rounded-lg overflow-hidden">
-              <div className="px-6 py-4 bg-gray-100">
-                <h3 className="text-lg font-bold text-gray-900">Our Process</h3>
-              </div>
-              <div className="px-6 py-6">
-                <ol className="space-y-4">
-                  {service.processSteps.map((step, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">
-                        {index + 1}
-                      </span>
-                      <span className="text-gray-800 text-sm">{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-
-            {/* Other Services */}
-            <div className="rounded-lg overflow-hidden">
-              <div className="bg-gray-800 px-6 py-4">
-                <h3 className="text-white text-lg font-bold">Other Services</h3>
-              </div>
-              <div className="bg-gray-700 px-6 py-6 space-y-4">
-                {services.filter(s => s.slug !== service.slug).map(s => (
-                  <Link
-                    key={s.slug}
-                    href={`/services/${s.slug}`}
-                    className="block text-white hover:text-blue-300 transition-colors"
-                  >
-                    <div className="flex items-center">
-                      <span className="text-2xl mr-3">{s.icon}</span>
-                      <span>{s.title}</span>
-                    </div>
-                  </Link>
+              <div className="space-y-10">
+                {sections.map((section, index) => (
+                    <section
+                        key={index}
+                        className="border-b border-gray-200 pb-8 last:border-b-0"
+                    >
+                      {section.title && (
+                          <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+                            {section.title}
+                          </h2>
+                      )}
+                      {section.content && (
+                          <div className="mb-6 whitespace-pre-line leading-relaxed text-gray-800">
+                            {section.content}
+                          </div>
+                      )}
+                      {section.subsections?.length > 0 && (
+                          <div className="space-y-4">
+                            {section.subsections.map((sub, i) => (
+                                <div
+                                    key={i}
+                                    className="rounded-r border-l-4 border-blue-600 bg-blue-50 p-4 pl-6"
+                                >
+                                  {sub.subtitle && (
+                                      <h3 className="mb-2 font-semibold text-blue-700">
+                                        {sub.subtitle}
+                                      </h3>
+                                  )}
+                                  {sub.details && (
+                                      <p className="text-gray-700">{sub.details}</p>
+                                  )}
+                                </div>
+                            ))}
+                          </div>
+                      )}
+                    </section>
                 ))}
               </div>
-            </div>
 
-            {/* Contact CTA */}
-            <div className="bg-gradient-to-br from-blue-600 to-purple-700 text-white p-6 rounded-lg">
-              <h3 className="text-lg font-bold mb-2">Need Expert Advice?</h3>
-              <p className="text-blue-100 text-sm mb-4">
-                Get personalized guidance from our migration experts.
-              </p>
-              <Link
-                href="/contact"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-center block transition-colors">
-                Contact Us Today
-              </Link>
-            </div>
-          </aside>
-        </div>
-      </section>
+              {content.conclusion && (
+                  <div className="mt-12 rounded-lg bg-gray-50 p-8">
+                    <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+                      Ready to Get Started?
+                    </h2>
+                    <p className="mb-6 text-gray-800">{content.conclusion}</p>
+                    <button
+                        onClick={() => setShowModal(true)}
+                        className="rounded-lg border-2 border-blue-600 px-8 py-3 font-semibold text-blue-600 transition-colors hover:bg-blue-600 hover:text-white"
+                    >
+                      Book Consultation
+                    </button>
+                  </div>
+              )}
 
-      <Footer />
+              {checklist.length > 0 && (
+                  <div className="mt-12">
+                    <h3 className="mb-4 text-xl font-semibold text-gray-900">
+                      Essential Checklist
+                    </h3>
+                    <div className="rounded-lg bg-green-50 p-6">
+                      <ul className="space-y-2">
+                        {checklist.map((item, index) => (
+                            <li key={index} className="flex items-start">
+                        <span className="mr-3 mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-600">
+                          <span className="text-xs text-white">✓</span>
+                        </span>
+                              <span className="text-gray-800">{item}</span>
+                            </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+              )}
+            </article>
 
-      {/* Modal */}
-      {showModal && (
-        <BookNowModal
-          show={showModal}
-          onClose={handleCloseModal}
-          formData={formData}
-          onInputChange={handleInputChange}
-          onSubmit={handleSubmit}
-        />
-      )}
-    </main>
+            {/* Sidebar */}
+            <aside className="space-y-8">
+              <div className="overflow-hidden rounded-lg bg-blue-600 text-white">
+                <div className="bg-blue-700 px-6 py-4">
+                  <h3 className="text-lg font-bold">Quick Information</h3>
+                </div>
+                <div className="space-y-4 px-6 py-6">
+                  {service.processingTime && (
+                      <div>
+                        <p className="text-sm text-blue-100">Processing Time</p>
+                        <p className="font-semibold">{service.processingTime}</p>
+                      </div>
+                  )}
+                  {countries.length > 0 && (
+                      <div>
+                        <p className="text-sm text-blue-100">Available Countries</p>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {countries.map((country, index) => (
+                              <span
+                                  key={index}
+                                  className="rounded bg-blue-500 px-2 py-1 text-xs"
+                              >
+                          {country}
+                        </span>
+                          ))}
+                        </div>
+                      </div>
+                  )}
+                  {service.author && (
+                      <div>
+                        <p className="text-sm text-blue-100">Expert Consultant</p>
+                        <p className="font-semibold">{service.author}</p>
+                      </div>
+                  )}
+                </div>
+              </div>
+
+              {processSteps.length > 0 && (
+                  <div className="overflow-hidden rounded-lg bg-gray-50">
+                    <div className="bg-gray-100 px-6 py-4">
+                      <h3 className="text-lg font-bold text-gray-900">Our Process</h3>
+                    </div>
+                    <div className="px-6 py-6">
+                      <ol className="space-y-4">
+                        {processSteps.map((step, index) => (
+                            <li key={index} className="flex items-start">
+                        <span className="mr-3 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                          {index + 1}
+                        </span>
+                              <span className="text-sm text-gray-800">{step}</span>
+                            </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+              )}
+
+              {otherServices.length > 0 && (
+                  <div className="overflow-hidden rounded-lg">
+                    <div className="bg-gray-800 px-6 py-4">
+                      <h3 className="text-lg font-bold text-white">Other Services</h3>
+                    </div>
+                    <div className="space-y-4 bg-gray-700 px-6 py-6">
+                      {otherServices.map((s) => (
+                          <Link
+                              key={s.slug}
+                              href={`/services/${s.slug}`}
+                              className="block text-white transition-colors hover:text-blue-300"
+                          >
+                            <div className="flex items-center">
+                              {s.icon && (
+                                  <span className="mr-3 text-2xl">{s.icon}</span>
+                              )}
+                              <span>{s.title}</span>
+                            </div>
+                          </Link>
+                      ))}
+                    </div>
+                  </div>
+              )}
+
+              <div className="rounded-lg bg-gradient-to-br from-blue-600 to-purple-700 p-6 text-white">
+                <h3 className="mb-2 text-lg font-bold">Need Expert Advice?</h3>
+                <p className="mb-4 text-sm text-blue-100">
+                  Get personalized guidance from our migration experts.
+                </p>
+                <Link
+                    href="/contact"
+                    className="block rounded-lg bg-white px-6 py-3 text-center font-semibold text-blue-600 transition-colors hover:bg-gray-100"
+                >
+                  Contact Us Today
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <Footer />
+
+        {showModal && (
+            <BookNowModal
+                show={showModal}
+                onClose={handleCloseModal}
+                formData={formData}
+                onInputChange={handleInputChange}
+                onSubmit={handleSubmit}
+            />
+        )}
+      </main>
   );
 }

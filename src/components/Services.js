@@ -1,206 +1,123 @@
 "use client";
 
-import React, { useState } from "react";
-import {FileIcon, Tracking, HeartIcon, BriefcaseIcon, GroupIcon, ChevronLeftIcon, ChevronDownIcon} from "@/icons";
-
-const serviceCategories = [
-  {
-    id: "visa-advice",
-    title: "Visa Advice and Application Services",
-    icon: <FileIcon className="w-6 h-6" />,
-    description: "Complete visa guidance from application to approval",
-    iconColor: "text-blue-600",
-    services: [
-      {
-        category: "Temporary Visas",
-        items: [
-          "Student visa advice and applications",
-          "Visitor visa advice and applications",
-          "Work visa applications"
-        ]
-      },
-      {
-        category: "Resident Visas",
-        items: [
-          "Skilled Migrant Category (SMC)",
-          "Residence from Work",
-          "Partner or family-sponsored residency",
-          "Investor and Entrepreneur categories"
-        ]
-      },
-      {
-        category: "Visa Extensions and Variations",
-        items: [
-          "Extending current visas",
-          "Varying conditions (change of employer, location, job title)"
-        ]
-      }
-    ]
-  },
-  {
-    id: "employer-services",
-    title: "Employer Services (Business Immigration Support)",
-    icon: <BriefcaseIcon className="w-6 h-6" />,
-    description: "Supporting businesses with immigration compliance and staff visas",
-    iconColor: "text-green-600",
-    services: [
-      {
-        category: "Business Support",
-        items: [
-          "Supporting employer accreditation under the AEWV scheme",
-          "Job check applications",
-          "Labour market testing advice",
-          "Work visa support for staff",
-          "Immigration audits and compliance planning"
-        ]
-      }
-    ]
-  },
-  {
-    id: "family-partnership",
-    title: "Family and Partnership Support",
-    icon: <HeartIcon className="w-6 h-6" />,
-    description: "Guidance for family reunification and relationships",
-    iconColor: "text-pink-600",
-    services: [
-      {
-        category: "Family Reunification",
-        items: [
-          "Partner and spouse visa applications",
-          "Parent residence visa advice",
-          "Dependent children's visas",
-          "Relationship evidence assessment and coaching"
-        ]
-      }
-    ]
-  },
-  {
-    id: "immigration-strategy",
-    title: "Immigration Strategy and Settlement Planning",
-    icon: <Tracking className="w-6 h-6" />,
-    description: "Long-term planning for your immigration journey",
-    iconColor: "text-purple-600",
-    services: [
-      {
-        category: "Strategic Planning",
-        items: [
-          "Long-term immigration planning",
-          "Pathways to residency and citizenship",
-          "Advising students and graduates on post-study work/residency options",
-          "Settlement support referrals (housing, schooling, health)"
-        ]
-      }
-    ]
-  },
-  {
-    id: "other-services",
-    title: "Additional Support Services",
-    icon: <GroupIcon className="w-6 h-6" />,
-    description: "Comprehensive support for all your immigration needs",
-    iconColor: "text-amber-600",
-    services: [
-      {
-        category: "Administrative Support",
-        items: [
-          "Updating Immigration New Zealand on changes (address, employment)",
-          "Immigration document checks and second opinions",
-          "Assistance with English language requirements (IELTS, TOEFL, PTE)",
-          "Skill assessments support (NZQA)",
-          "Visa Checker services"
-        ]
-      }
-    ]
-  }
-];
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { contentApi } from "@/lib/api";
 
 export default function ImmigrationServices() {
-  const [expandedService, setExpandedService] = useState(null);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const toggleService = (serviceId) => {
-    setExpandedService(expandedService === serviceId ? null : serviceId);
-  };
+  useEffect(() => {
+    let cancelled = false;
+    contentApi.services()
+        .then((res) => {
+          if (!cancelled) setServices(res?.data || []);
+        })
+        .catch(() => {
+          if (!cancelled) setServices([]);
+        })
+        .finally(() => {
+          if (!cancelled) setLoading(false);
+        });
+    return () => { cancelled = true; };
+  }, []);
+
+  if (!loading && services.length === 0) return null;
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Explore Our Services
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive immigration solutions tailored to your unique journey. From visa applications to settlement planning, we're with you every step of the way.
-          </p>
-        </div>
+      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">
+              Explore Our Services
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Comprehensive immigration solutions tailored to your unique journey. From visa applications to settlement planning, we're with you every step of the way.
+            </p>
+          </div>
 
-        {/* Services Grid */}
-        <div className="space-y-6">
-          {serviceCategories.map((service) => (
-            <div
-              key={service.id}
-              className={`border-2 rounded-2xl overflow-hidden transition-all duration-100 hover:shadow-lg`}
-            >
-              {/* Service Header */}
-              <div
-                className="p-6 cursor-pointer"
-                onClick={() => toggleService(service.id)}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className={`${service.iconColor} bg-white p-3 rounded-lg shadow-sm`}>
-                      {service.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600">
-                        {service.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <button className="bg-gray-900 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
-                      Learn More
-                    </button>
-                    {expandedService === service.id ? (
-                      <ChevronDownIcon className="w-6 h-6 text-gray-600" />
-                    ) : (
-                      <ChevronLeftIcon className="w-6 h-6 text-gray-600" />
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Expanded Content */}
-              {expandedService === service.id && (
-                <div className="px-6 pb-6">
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    {service.services.map((category, idx) => (
-                      <div key={idx} className={idx > 0 ? "mt-6" : ""}>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-3">
-                          {category.category}
-                        </h4>
-                        <div className="grid md:grid-cols-2 gap-3">
-                          {category.items.map((item, itemIdx) => (
-                            <div
-                              key={itemIdx}
-                              className="flex items-start space-x-2"
-                            >
-                              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
-                              <span className="text-gray-700">{item}</span>
-                            </div>
-                          ))}
+          {/* Services Grid */}
+          {loading ? (
+              <div className="space-y-6">
+                {[0, 1, 2].map((i) => (
+                    <div key={i} className="border-2 rounded-2xl p-6 animate-pulse">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-slate-200 rounded-lg" />
+                        <div className="flex-1 space-y-2">
+                          <div className="h-5 bg-slate-200 rounded w-1/3" />
+                          <div className="h-4 bg-slate-200 rounded w-2/3" />
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+                    </div>
+                ))}
+              </div>
+          ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {services.map((service) => (
+                    <div key={service.slug || index} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group hover:-translate-y-2">
+                        <div className="p-8">
+                            <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                {service.icon || '📋'}
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                            <p className="text-gray-600 mb-6 leading-relaxed">{service.description || service.excerpt}</p>
+
+                            {service.features && service.features.length > 0 && (
+                                <div className="mb-6">
+                                    <h4 className="font-semibold text-gray-900 mb-3">What's Included:</h4>
+                                    <ul className="space-y-2">
+                                        {service.features.slice(0, 5).map((feature, idx) => (
+                                            <li key={idx} className="flex items-center text-gray-700">
+                                                <div className="w-2 h-2 bg-blue-600 rounded-full mr-3 flex-shrink-0"></div>
+                                                <span className="text-sm">{feature}</span>
+                                            </li>
+                                        ))}
+                                        {service.features.length > 5 && (
+                                            <li className="text-sm text-blue-600 font-medium">
+                                                + {service.features.length - 5} more services
+                                            </li>
+                                        )}
+                                    </ul>
+                                </div>
+                            )}
+
+                            <div className="mb-6 p-4 bg-blue-50 rounded-lg">
+                                {service.processingTime && (
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="text-sm font-medium text-gray-700">Processing Time:</span>
+                                        <span className="text-sm font-bold text-blue-600">{service.processingTime}</span>
+                                    </div>
+                                )}
+                                {service.countries && service.countries.length > 0 && (
+                                    <div className="flex flex-wrap gap-1 mt-2">
+                                        {service.countries.slice(0, 3).map((country, idx) => (
+                                            <span key={idx} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                              {country}
+                            </span>
+                                        ))}
+                                        {service.countries.length > 3 && (
+                                            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                              +{service.countries.length - 3} more
+                            </span>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+
+                            <Link
+                                href={`/services/${service.slug}`}
+                                className="block w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-center px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                            >
+                                Learn More
+                            </Link>
+                        </div>
+                    </div>
+                ))}
+              </div>
+          )}
         </div>
-      </div>
-    </section>
+      </section>
   );
 }

@@ -2,115 +2,158 @@ import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import posts from '../../../data/posts';
+import { contentApi } from '@/lib/api'; // adjust path
 
 export async function generateStaticParams() {
-  return posts.map(post => ({ slug: post.slug }));
+    try {
+        const res = await contentApi.blogPosts();
+        const posts = res?.data ?? [];
+        return posts.map((p) => ({ slug: p.slug }));
+    } catch {
+        return [];
+    }
 }
 
 export async function generateMetadata({ params }) {
-  const post = posts.find(p => p.slug === params.slug);
-  if (!post) return { title: 'Post Not Found' };
-
-  return {
-    title: post.title,
-    description: post.metaDescription || post.excerpt,
-  };
+    const { slug } = await params;
+    try {
+        const res = await contentApi.blogPost(slug);
+        const post = res?.data;
+        if (!post) return { title: 'Post Not Found' };
+        return {
+            title: post.title,
+            description: post.metaDescription || post.excerpt,
+        };
+    } catch {
+        return { title: 'Post Not Found' };
+    }
 }
 
-export default function BlogPost({ params }) {
-  const post = posts.find(p => p.slug === params.slug);
+export default async function BlogPost({ params }) {
+    const { slug } = await params;
 
-  if (!post) notFound();
+    let post = null;
+    let recentPosts = [];
 
-  return (
-    <main>
-      <Header />
+    try {
+        const [detailRes, listRes] = await Promise.all([
+            contentApi.blogPost(slug),
+            contentApi.blogPosts({ limit: 10 }),
+        ]);
+        post = detailRes?.data ?? null;
+        recentPosts = (listRes?.data ?? []).filter((p) => p.slug !== slug).slice(0, 10);
+    } catch {
+        // leave post null
+    }
 
-      {/* Hero Section */}
-      <div className="relative bg-slate-800 py-20 bg-cover bg-center min-h-[55vh]"
-          style={{ backgroundImage: `url(${post.image})` }}>
-          <div className="absolute inset-0 bg-black/50"></div>
-          <div className="relative z-10 text-center text-white items-center pt-32">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
-            <p className="text-lg text-gray-300">Published on {post.publishDate} by {post.author}</p>
-          </div>
-      </div>
+    if (!post) notFound();
 
-      {/* Content + Sidebar */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
-          {/* Article */}
-          <article className="lg:col-span-2 prose prose-lg max-w-none">
-            <p className="text-xl text-gray-700 mb-8">{post.content.introduction}</p>
+    const content = post.content ?? {};
+    const sections = content.sections ?? [];
+    // Note: BlogPost type in your API does not include checklist; keep optional if backend sends it
+    const checklist = content.checklist ?? [];
 
-            {post.content.sections.map((section, index) => (
-              <section key={index} className="mb-10">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-2">{section.title}</h2>
-                <p className="text-gray-800 leading-relaxed whitespace-pre-line">
-                  {section.content}
-                </p>
+    return (
+        <main>
+            <Header />
 
-                {section.subsections?.map((sub, i) => (
-                  <div key={i} className="mt-4 pl-4 border-l-4 border-blue-600">
-                    <h3 className="font-semibold text-blue-700">{sub.subtitle}</h3>
-                    <p className="text-gray-700">{sub.details}</p>
-                  </div>
-                ))}
-              </section>
-            ))}
-
-            {post.content.conclusion && (
-              <div className="mt-12">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-2">Conclusion</h2>
-                <p className="text-gray-800">{post.content.conclusion}</p>
-              </div>
-            )}
-
-            {post.content.checklist && (
-              <div className="mt-8">
-                <h3 className="font-semibold text-gray-900 mb-2">Checklist:</h3>
-                <ul className="list-disc list-inside text-gray-800">
-                  {post.content.checklist.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </article>
-
-          {/* Sidebar */}
-          {/* Search Box */}
-            {/* <div className="bg-gray-100 rounded-lg p-4">
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-400"
-              />
-            </div> */}
-          <aside className="space-y-8">
-            <div className="rounded-lg overflow-hidden">
-              <div className="bg-blue-600 px-6 py-4">
-                <h3 className="text-white text-lg font-bold">Recent Posts</h3>
-              </div>
-              <div className="bg-gray-700 px-6 py-6 space-y-4">
-                {posts.slice(0, 10).map(p => (
-                  <Link
-                    key={p.slug}
-                    href={`/blog/${p.slug}`}
-                    className="block text-white hover:underline"
-                  >
-                    {p.title}
-                  </Link>
-                ))}
-              </div>
+            <div
+                className="relative min-h-[55vh] bg-cover bg-center bg-slate-800 py-20"
+                style={{
+                    backgroundImage: post.image
+                        ? `url(${post.image})`
+                        : 'url("/images/bg.png")',
+                }}
+            >
+                <div className="absolute inset-0 bg-black/50" />
+                <div className="relative z-10 items-center pt-32 text-center text-white">
+                    <h1 className="mb-4 text-4xl font-bold md:text-5xl">{post.title}</h1>
+                    <p className="text-lg text-gray-300">
+                        {post.publishDate && <>Published on {post.publishDate}</>}
+                        {post.author && <> by {post.author}</>}
+                    </p>
+                </div>
             </div>
-          </aside>
-        </div>
-      </section>
 
-      <Footer />
-    </main>
-  );
+            <section className="bg-white py-16">
+                <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
+                    <article className="prose prose-lg max-w-none lg:col-span-2">
+                        {content.introduction && (
+                            <p className="mb-8 text-xl text-gray-700">{content.introduction}</p>
+                        )}
+
+                        {sections.map((section, index) => (
+                            <section key={index} className="mb-10">
+                                {section.title && (
+                                    <h2 className="mb-2 text-2xl font-semibold text-gray-900">
+                                        {section.title}
+                                    </h2>
+                                )}
+                                {section.content && (
+                                    <p className="whitespace-pre-line leading-relaxed text-gray-800">
+                                        {section.content}
+                                    </p>
+                                )}
+                                {section.subsections?.map((sub, i) => (
+                                    <div key={i} className="mt-4 border-l-4 border-blue-600 pl-4">
+                                        {sub.subtitle && (
+                                            <h3 className="font-semibold text-blue-700">
+                                                {sub.subtitle}
+                                            </h3>
+                                        )}
+                                        {sub.details && (
+                                            <p className="text-gray-700">{sub.details}</p>
+                                        )}
+                                    </div>
+                                ))}
+                            </section>
+                        ))}
+
+                        {content.conclusion && (
+                            <div className="mt-12">
+                                <h2 className="mb-2 text-2xl font-semibold text-gray-900">
+                                    Conclusion
+                                </h2>
+                                <p className="text-gray-800">{content.conclusion}</p>
+                            </div>
+                        )}
+
+                        {checklist.length > 0 && (
+                            <div className="mt-8">
+                                <h3 className="mb-2 font-semibold text-gray-900">Checklist:</h3>
+                                <ul className="list-inside list-disc text-gray-800">
+                                    {checklist.map((item, index) => (
+                                        <li key={index}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </article>
+
+                    <aside className="space-y-8">
+                        {recentPosts.length > 0 && (
+                            <div className="overflow-hidden rounded-lg">
+                                <div className="bg-blue-600 px-6 py-4">
+                                    <h3 className="text-lg font-bold text-white">Recent Posts</h3>
+                                </div>
+                                <div className="space-y-4 bg-gray-700 px-6 py-6">
+                                    {recentPosts.map((p) => (
+                                        <Link
+                                            key={p.slug}
+                                            href={`/blog/${p.slug}`}
+                                            className="block text-white hover:underline"
+                                        >
+                                            {p.title}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </aside>
+                </div>
+            </section>
+
+            <Footer />
+        </main>
+    );
 }

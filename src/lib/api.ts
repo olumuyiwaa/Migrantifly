@@ -219,6 +219,70 @@ export interface Notification extends MongoDoc {
   [key: string]: unknown;
 }
 
+// ---------- content: services & blog (admin-managed, landing pages) ----------
+
+export interface ContentSubsection {
+  subtitle?: string;
+  details?: string;
+}
+
+export interface ContentSection {
+  title?: string;
+  content?: string;
+  subsections?: ContentSubsection[];
+}
+
+export interface RichContent {
+  introduction?: string;
+  sections?: ContentSection[];
+  conclusion?: string;
+  checklist?: string[];
+}
+
+export interface Service extends MongoDoc {
+  slug: string;
+  title: string;
+  description: string;
+  excerpt?: string;
+  image?: string;
+  imageAlt?: string;
+  icon?: string;
+  features?: string[];
+  metaDescription?: string;
+  content?: RichContent;
+  processSteps?: string[];
+  countries?: string[];
+  processingTime?: string;
+  author?: string;
+  isPublished?: boolean;
+  order?: number;
+}
+
+export type ServiceInput = Partial<Omit<Service, keyof MongoDoc>>;
+
+export interface BlogPost extends MongoDoc {
+  slug: string;
+  title: string;
+  excerpt?: string;
+  metaDescription?: string;
+  tags?: string[];
+  category?: string;
+  readingTime?: string;
+  author?: string;
+  image?: string;
+  imageAlt?: string;
+  featured?: boolean;
+  content?: {
+    introduction?: string;
+    sections?: ContentSection[];
+    conclusion?: string;
+  };
+  isPublished?: boolean;
+  publishDate?: string;
+}
+
+export type BlogPostInput = Partial<Omit<BlogPost, keyof MongoDoc>>;
+
 // ---------- request payloads ----------
 
 export interface LoginRequest {
@@ -686,6 +750,68 @@ export const adminApi = {
 
   systemHealth: () =>
       fetchApi<{ success?: boolean; data?: unknown }>("/admin/system-health"),
+
+  // ---- services (landing page content) ----
+  services: () =>
+      fetchApi<{ success?: boolean; data?: Service[] }>("/admin/services"),
+
+  service: (id: string) =>
+      fetchApi<{ success?: boolean; data?: Service }>(`/admin/services/${id}`),
+
+  createService: (data: ServiceInput) =>
+      postApi<{ success?: boolean; message?: string; data?: Service }>(
+          "/admin/services",
+          data
+      ),
+
+  updateService: (id: string, data: ServiceInput) =>
+      putApi<{ success?: boolean; message?: string; data?: Service }>(
+          `/admin/services/${id}`,
+          data
+      ),
+
+  deleteService: (id: string) =>
+      deleteApi<{ success?: boolean; message?: string }>(`/admin/services/${id}`),
+
+  // ---- blog posts (landing page content) ----
+  blogPosts: () =>
+      fetchApi<{ success?: boolean; data?: BlogPost[] }>("/admin/blog"),
+
+  blogPost: (id: string) =>
+      fetchApi<{ success?: boolean; data?: BlogPost }>(`/admin/blog/${id}`),
+
+  createBlogPost: (data: BlogPostInput) =>
+      postApi<{ success?: boolean; message?: string; data?: BlogPost }>(
+          "/admin/blog",
+          data
+      ),
+
+  updateBlogPost: (id: string, data: BlogPostInput) =>
+      putApi<{ success?: boolean; message?: string; data?: BlogPost }>(
+          `/admin/blog/${id}`,
+          data
+      ),
+
+  deleteBlogPost: (id: string) =>
+      deleteApi<{ success?: boolean; message?: string }>(`/admin/blog/${id}`),
+};
+
+// ---------- content (public: landing / commercial pages) ----------
+
+export const contentApi = {
+  services: () =>
+      fetchApi<{ success?: boolean; data?: Service[] }>("/services"),
+
+  service: (slug: string) =>
+      fetchApi<{ success?: boolean; data?: Service }>(`/services/${slug}`),
+
+  blogPosts: (params?: { featured?: boolean; limit?: number }) =>
+      fetchApi<{ success?: boolean; data?: BlogPost[] }>(
+          `/blog${buildQuery(params)}`
+      ),
+
+  blogPost: (slug: string) =>
+      fetchApi<{ success?: boolean; data?: BlogPost }>(`/blog/${slug}`),
 };
 
 // ---------- applications ----------

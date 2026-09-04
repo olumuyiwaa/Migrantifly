@@ -15,7 +15,7 @@ import {
   CalenderIcon,
   TransactionsIcon,
   UserCircleIcon, DollarLineIcon,
-  ShootingStarIcon,
+  ShootingStarIcon, PageIcon, TableIcon,
 } from '../icons/index';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { getStoredUser, type AuthUserSummary, type UserRole } from '@/lib/api';
@@ -63,6 +63,16 @@ const adminNavItems: NavItem[] = [
     icon: <TransactionsIcon />,
     name: 'Transactions',
     path: '/portal/transactions',
+  },
+  {
+    icon: <TableIcon />,
+    name: 'Services',
+    path: '/portal/services',
+  },
+  {
+    icon: <PageIcon />,
+    name: 'Blogs',
+    path: '/portal/blog',
   },
   {
     icon: <ShootingStarIcon />,
